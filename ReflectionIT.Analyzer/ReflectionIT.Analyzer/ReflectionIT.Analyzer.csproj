@@ -43,6 +43,7 @@
     <Compile Include="Analyzers\AsyncMethodNameSuffix\CodeFixProvider.cs" />
     <Compile Include="Analyzers\AsyncMethodNameSuffix\DiagnosticAnalyzer.cs" />
     <Compile Include="Analyzers\DependencyProperty.cs" />
+    <Compile Include="Analyzers\ExplicitTypecast\ExplicitReturnTypecastCodeFix.cs" />
     <Compile Include="Analyzers\ExplicitTypecast\ExplicitTypecastCodeFix.cs" />
     <Compile Include="Analyzers\MissingModifiers\CodeFixProvider.cs" />
     <Compile Include="Analyzers\MissingModifiers\DiagnosticAnalyzer.cs" />

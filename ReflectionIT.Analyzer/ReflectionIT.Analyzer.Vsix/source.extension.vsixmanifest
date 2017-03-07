@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
     <Identity Id="ReflectionIT.Analyzer.Vsix..9141f8bd-0903-4c24-a643-ac62962dc6b4" Version="1.8" Language="en-US" Publisher="FonsS"/>
-    <DisplayName>ReflectionIT.Analyzer.Vsix</DisplayName>
+    <DisplayName>ReflectionIT.Analyzer</DisplayName>
     <Description xml:space="preserve">Reflection IT Code Analyzer (with Fixes) and Refactorings</Description>
   </Metadata>
   <Installation>
