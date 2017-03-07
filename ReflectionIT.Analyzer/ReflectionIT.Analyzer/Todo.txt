@@ -1,8 +1,0 @@
-﻿Todo:
-
-Refactorings:
-- Sort Members (Fields, Events, Constructors, Methods, etc)
--
-
-Analyzers
-- 

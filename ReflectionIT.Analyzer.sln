@@ -9,11 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionIT.Analyzer.Test"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionIT.Analyzer.Vsix", "ReflectionIT.Analyzer\ReflectionIT.Analyzer.Vsix\ReflectionIT.Analyzer.Vsix.csproj", "{CC099EEA-21E2-4917-88FB-CD632F56EBBA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA30CCBE-AA9B-4554-8BA9-4D600B5909D4}"
-	ProjectSection(SolutionItems) = preProject
-		License.txt = License.txt
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
