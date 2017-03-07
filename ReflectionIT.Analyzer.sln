@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionIT.Analyzer.Test"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionIT.Analyzer.Vsix", "ReflectionIT.Analyzer\ReflectionIT.Analyzer.Vsix\ReflectionIT.Analyzer.Vsix.csproj", "{CC099EEA-21E2-4917-88FB-CD632F56EBBA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E3D0173D-0446-452F-A639-929D5842908A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Training\Microsoft.NET\Blend\Demo Windows 10\04 Styling and Templating\AnimatedHeaderedTextBoxStyle\License.txt = ..\..\..\Training\Microsoft.NET\Blend\Demo Windows 10\04 Styling and Templating\AnimatedHeaderedTextBoxStyle\License.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
