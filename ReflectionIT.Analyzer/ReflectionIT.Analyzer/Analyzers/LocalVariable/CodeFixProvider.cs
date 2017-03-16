@@ -16,11 +16,11 @@ using Microsoft.CodeAnalysis.Text;
 namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
 
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PrivateFieldCodeFixProvider)), Shared]
-    public class PrivateFieldCodeFixProvider : CodeFixProvider {
-        private const string title = "Prefix with _ and make camelCase";
+    public class LocalVariableCodeFixProvider : CodeFixProvider {
+        private const string title = "Make camelCase";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds {
-            get { return ImmutableArray.Create(PrivateFieldAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(LocalVariableAnalyzer.DiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider() {
@@ -35,7 +35,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
             // Find the type declaration identified by the diagnostic.
-            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<FieldDeclarationSyntax>().First();
+            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<VariableDeclaratorSyntax>().First();
 
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
@@ -46,10 +46,10 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
                 diagnostic);
         }
 
-        private async Task<Solution> PrefixWithUnderscoreAndMakeCamelCaseAsync(Document document, FieldDeclarationSyntax field, CancellationToken cancellationToken) {
-            var identifierToken = field.Declaration.Variables.First().Identifier;
+        private async Task<Solution> PrefixWithUnderscoreAndMakeCamelCaseAsync(Document document, VariableDeclaratorSyntax localVar, CancellationToken cancellationToken) {
+            var identifierToken = localVar.Identifier;
 
-            var newName = PrivateFieldAnalyzer.GetCorrectFieldName(identifierToken.Text);
+            var newName = identifierToken.Text[0].ToString().ToLower() + identifierToken.Text.Substring(1);
 
             // Get the symbol representing the type to be renamed.
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken);

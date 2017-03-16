@@ -36,10 +36,10 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
 
             // Find fields (not constants) with invalid names
             if (fieldSymbol.DeclaredAccessibility == Accessibility.Private &&
-                !fieldSymbol.IsConst &&
+                !fieldSymbol.IsConst && !string.IsNullOrWhiteSpace(fieldSymbol.Name) &&
                 fieldSymbol.Name[0] != '_' ) {
 
-                var name = "_" + fieldSymbol.Name[0].ToString().ToLower() + fieldSymbol.Name.Substring(1);
+                string name = GetCorrectFieldName(fieldSymbol.Name);
 
                 if (fieldSymbol.Name != name) {
 
@@ -49,6 +49,17 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
                     context.ReportDiagnostic(diagnostic);
                 }
             }
+        }
+
+        internal static string GetCorrectFieldName(string name) {
+
+            if (name.StartsWith("m_") && name.Length > 2) {
+                name = "_" + name[2].ToString().ToLower() + name.Substring(3);
+            } else {
+                name = "_" + name[0].ToString().ToLower() + name.Substring(1);
+            }
+
+            return name;
         }
     }
 }

@@ -116,6 +116,33 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Local variables must be camelCased.
+        /// </summary>
+        internal static string LocalVariableAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("LocalVariableAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local variable &apos;{0}&apos; is not camelCased.
+        /// </summary>
+        internal static string LocalVariableAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("LocalVariableAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local variable must be camelCased.
+        /// </summary>
+        internal static string LocalVariableAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("LocalVariableAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use explicit modifiers.
         /// </summary>
         internal static string MissingModifiersAnalyzerDescription {
@@ -170,7 +197,7 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Private fields must start with an underscore and camelCasing.
+        ///   Looks up a localized string similar to Private fields must start with an underscore and camelCased.
         /// </summary>
         internal static string PrivateFieldAnalyzerDescription {
             get {
@@ -179,7 +206,7 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Private field &apos;{0}&apos; does not start with an underscore and camelCasing.
+        ///   Looks up a localized string similar to Private field &apos;{0}&apos; does not start with an underscore and camelCased.
         /// </summary>
         internal static string PrivateFieldAnalyzerMessageFormat {
             get {
@@ -188,7 +215,7 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Private field must start with an underscore and camelCasing.
+        ///   Looks up a localized string similar to Private field must start with an underscore and camelCased.
         /// </summary>
         internal static string PrivateFieldAnalyzerTitle {
             get {

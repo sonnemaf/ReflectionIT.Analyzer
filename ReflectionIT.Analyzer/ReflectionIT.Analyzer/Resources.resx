@@ -141,6 +141,18 @@
     <value>Capture using local variable</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="LocalVariableAnalyzerDescription" xml:space="preserve">
+    <value>Local variables must be camelCased</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
+  <data name="LocalVariableAnalyzerMessageFormat" xml:space="preserve">
+    <value>Local variable '{0}' is not camelCased</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
+  <data name="LocalVariableAnalyzerTitle" xml:space="preserve">
+    <value>Local variable must be camelCased</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
   <data name="MissingModifiersAnalyzerDescription" xml:space="preserve">
     <value>Use explicit modifiers</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
@@ -166,15 +178,15 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="PrivateFieldAnalyzerDescription" xml:space="preserve">
-    <value>Private fields must start with an underscore and camelCasing</value>
+    <value>Private fields must start with an underscore and camelCased</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="PrivateFieldAnalyzerMessageFormat" xml:space="preserve">
-    <value>Private field '{0}' does not start with an underscore and camelCasing</value>
+    <value>Private field '{0}' does not start with an underscore and camelCased</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="PrivateFieldAnalyzerTitle" xml:space="preserve">
-    <value>Private field must start with an underscore and camelCasing</value>
+    <value>Private field must start with an underscore and camelCased</value>
     <comment>The title of the diagnostic.</comment>
   </data>
 </root>

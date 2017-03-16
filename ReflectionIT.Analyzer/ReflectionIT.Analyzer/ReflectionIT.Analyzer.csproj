@@ -51,6 +51,8 @@
     <Compile Include="Analyzers\NonPrivateField\DiagnosticAnalyzer.cs" />
     <Compile Include="Analyzers\ForClosures\CodeFixProvider.cs" />
     <Compile Include="Analyzers\ForClosures\DiagnosticAnalyzer.cs" />
+    <Compile Include="Analyzers\LocalVariable\CodeFixProvider.cs" />
+    <Compile Include="Analyzers\LocalVariable\DiagnosticAnalyzer.cs" />
     <Compile Include="Analyzers\PrivateField\CodeFixProvider.cs" />
     <Compile Include="Analyzers\PrivateField\DiagnosticAnalyzer.cs" />
     <Compile Include="Analyzers\DiagnosticAnalyzerCategories.cs" />
