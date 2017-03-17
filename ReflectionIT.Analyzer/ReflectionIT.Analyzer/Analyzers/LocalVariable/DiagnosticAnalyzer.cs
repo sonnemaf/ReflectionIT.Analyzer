@@ -38,7 +38,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
                 var name = item.Identifier.Text;
 
                 // Find locals (not constants) with invalid names
-                if (!localVar.IsConst && 
+                if (!localVar.IsConst &&
                     !string.IsNullOrWhiteSpace(name) &&
                     !char.IsLower(name[0])) {
 
@@ -47,7 +47,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
                     if (newName != name) {
 
                         // For all such symbols, produce a diagnostic.
-                        var diagnostic = Diagnostic.Create(_rule, localVar.GetLocation(), name);
+                        var diagnostic = Diagnostic.Create(_rule, item.GetLocation(), name);
 
                         context.ReportDiagnostic(diagnostic);
                     }
@@ -55,4 +55,6 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             }
         }
     }
+
+   
 }

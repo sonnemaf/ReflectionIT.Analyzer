@@ -35,7 +35,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
             // Find the type declaration identified by the diagnostic.
-            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<FieldDeclarationSyntax>().First();
+            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<VariableDeclaratorSyntax>().First();
 
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
@@ -46,8 +46,8 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
                 diagnostic);
         }
 
-        private async Task<Solution> PrefixWithUnderscoreAndMakeCamelCaseAsync(Document document, FieldDeclarationSyntax field, CancellationToken cancellationToken) {
-            var identifierToken = field.Declaration.Variables.First().Identifier;
+        private async Task<Solution> PrefixWithUnderscoreAndMakeCamelCaseAsync(Document document, VariableDeclaratorSyntax field, CancellationToken cancellationToken) {
+            var identifierToken = field.Identifier;
 
             var newName = PrivateFieldAnalyzer.GetCorrectFieldName(identifierToken.Text);
 

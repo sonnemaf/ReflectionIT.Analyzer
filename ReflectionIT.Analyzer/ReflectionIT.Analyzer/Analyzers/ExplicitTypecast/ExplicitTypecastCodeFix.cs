@@ -13,10 +13,14 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Text;
 
+using Microsoft.CodeAnalysis.CSharp.Extensions;
+using Microsoft.CodeAnalysis.Editing;
+
 namespace ReflectionIT.Analyzer.Analyzers.ExplicitTypecast {
 
     /// <summary>
     /// int x = o; => int x = (int)o;
+    /// return o; => return (int)o;
     /// </summary>
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ExplicitTypecastCodeFix)), Shared]
     public class ExplicitTypecastCodeFix : CodeFixProvider {
@@ -42,77 +46,48 @@ namespace ReflectionIT.Analyzer.Analyzers.ExplicitTypecast {
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
             // Find the type declaration identified by the diagnostic.
-            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<VariableDeclarationSyntax>().FirstOrDefault();
+            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<VariableDeclaratorSyntax>().FirstOrDefault();
 
             if (declaration != null) {
 
-                if (declaration.Variables.Count > 1) {
-                    // TODO: solve multiple declarations 
-                    return;
-                }
+                var varDeclaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<VariableDeclarationSyntax>().FirstOrDefault();
+
 
                 // Register a code action that will invoke the fix.
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         title: title,
-                        createChangedDocument: c => AddExplicitTypcastAsync(context.Document, declaration, c),
+                        createChangedDocument: c => AddExplicitTypcastAsync(context.Document, declaration, varDeclaration, c),
                         equivalenceKey: title),
                     diagnostic);
 
-                //} else {
-                //    // Find the type declaration identified by the diagnostic.
-                //    var returnStatement = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<ReturnStatementSyntax>().FirstOrDefault();
-                //    if (returnStatement != null) {
-
-                //        TypeSyntax returnType = null;
-
-                //        var property = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<PropertyDeclarationSyntax>().FirstOrDefault();
-                //        if (property != null) {
-                //            returnType = property.Type;
-                //        } else {
-                //            var method = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<MethodDeclarationSyntax>().FirstOrDefault();
-                //            if (method != null) {
-                //                returnType = method.ReturnType;
-                //            }
-                //        }
-
-                //        if (returnType != null) {
-                //            context.RegisterCodeFix(
-                //                CodeAction.Create(
-                //                    title: title,
-                //                    createChangedDocument: c => AddExplicitTypcastAsync(context.Document, returnStatement, returnType, c),
-                //                    equivalenceKey: title),
-                //                diagnostic);
-                //        }
 
             }
         }
 
 
-        //private async Task<Document> AddExplicitTypcastAsync(Document document, ReturnStatementSyntax returnStatement, TypeSyntax returnType, CancellationToken c) {
-        //    var expr = returnStatement.Expression;
-        //    var cast = SyntaxFactory.CastExpression(returnType, expr);
 
-        //    /// Replace old with new
-        //    var oldRoot = await document.GetSyntaxRootAsync(c).ConfigureAwait(false);
-
-        //    var newRoot = oldRoot.ReplaceNode(expr, cast);
-
-        //    return document.WithSyntaxRoot(newRoot);
-        //}
-
-        private async Task<Document> AddExplicitTypcastAsync(Document document, VariableDeclarationSyntax declaration, CancellationToken c) {
-            var d = declaration.Variables.First();
+        private async Task<Document> AddExplicitTypcastAsync(Document document, VariableDeclaratorSyntax declaration, VariableDeclarationSyntax varDeclaration, CancellationToken c) {
+            var d = declaration;
             var i = d.Initializer;
-            var cast = SyntaxFactory.CastExpression((TypeSyntax)declaration.Type, i.Value);
 
-            // Replace old with new
+            //var cast = SyntaxGenerator.GetGenerator(document).CastExpression(varDeclaration.Type, i.Value).NormalizeWhitespace();
+
+            var cast = SyntaxFactory.CastExpression(varDeclaration.Type, i.Value).NormalizeWhitespace();
+
+            /// Replace old with new
             var oldRoot = await document.GetSyntaxRootAsync(c).ConfigureAwait(false);
 
             var newRoot = oldRoot.ReplaceNode(i.Value, cast);
 
             return document.WithSyntaxRoot(newRoot);
         }
+
+
+
+        
     }
+
+
 
 }
