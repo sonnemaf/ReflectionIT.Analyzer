@@ -58,10 +58,6 @@
     <Compile Include="Analyzers\DiagnosticAnalyzerCategories.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Refactorings\SortMembers.cs" />
-    <Compile Include="Refactorings\AutoPropertyToPrivateFieldWithPropertyAndOnPropertyChanged.cs" />
-    <Compile Include="Refactorings\AutoPropertyToDependencyProperty.cs" />
-    <Compile Include="Refactorings\MoveTypeToFileCodeRefactoringProvider.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

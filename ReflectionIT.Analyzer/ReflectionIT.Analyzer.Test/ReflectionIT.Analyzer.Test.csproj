@@ -129,6 +129,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ReflectionIT.Refactoring\ReflectionIT.Refactoring\ReflectionIT.Refactoring.csproj">
+      <Project>{5536036b-30dc-4921-b9cf-75758611a769}</Project>
+      <Name>ReflectionIT.Refactoring</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReflectionIT.Analyzer\ReflectionIT.Analyzer.csproj">
       <Project>{1CBD1D3D-5239-47D5-B6F5-E089DD51D1C1}</Project>
       <Name>ReflectionIT.Analyzer</Name>

@@ -4,16 +4,16 @@
     <id>ReflectionIT.Analyzer</id>
     <version>1.0.0.0</version>
     <title>ReflectionIT.Analyzer</title>
-    <authors>FonsS</authors>
-    <owners>FonsS</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <authors>Fons Sonnemans</authors>
+    <owners>Fons Sonnemans</owners>
+    <licenseUrl>https://github.com/sonnemaf/ReflectionIT.Analyzer/blob/master/License.txt</licenseUrl>
+    <projectUrl>https://github.com/sonnemaf/ReflectionIT.Analyzer</projectUrl>
     <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>ReflectionIT.Analyzer</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright</copyright>
-    <tags>ReflectionIT.Analyzer, analyzers</tags>
+    <copyright>Copyright Reflection IT BV</copyright>
+    <tags>ReflectionIT.Analyzer, analyzers, CSharp</tags>
   </metadata>
   <!-- The convention for analyzers is to put language agnostic dlls in analyzers\dotnet and language specific analyzers in either analyzers\dotnet\cs or analyzers\dotnet\vb -->
   <files>
