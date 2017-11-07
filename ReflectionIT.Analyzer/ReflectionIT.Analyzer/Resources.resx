@@ -177,6 +177,18 @@
     <value>Non Private fields (public, protected, internal) are not alloweded</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="NonPrivateFieldNameAnalyzerDescription" xml:space="preserve">
+    <value>Non Private field must be PascalCased</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
+  <data name="NonPrivateFieldNameAnalyzerMessageFormat" xml:space="preserve">
+    <value>Non private field '{0}' is not PascalCased</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
+  <data name="NonPrivateFieldNameAnalyzerTitle" xml:space="preserve">
+    <value>Non Private field must be PascalCased</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
   <data name="PrivateFieldAnalyzerDescription" xml:space="preserve">
     <value>Private fields must start with an underscore and camelCased</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>

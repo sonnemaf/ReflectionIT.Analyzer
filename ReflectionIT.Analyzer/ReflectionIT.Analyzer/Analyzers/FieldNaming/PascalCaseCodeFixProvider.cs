@@ -15,12 +15,12 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PrivateFieldCodeFixProvider)), Shared]
-    public class PrivateFieldCodeFixProvider : CodeFixProvider {
-        private const string title = "Prefix with _ and make camelCase";
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PascalCaseCodeFixProvider)), Shared]
+    public class PascalCaseCodeFixProvider : CodeFixProvider {
+        private const string title = "Make PascalCase";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds {
-            get { return ImmutableArray.Create(PrivateFieldAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(FieldNameAnalyzer.DiagnosticIdPascalName); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider() {
@@ -41,15 +41,15 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedSolution: c => PrefixWithUnderscoreAndMakeCamelCaseAsync(context.Document, declaration, c),
+                    createChangedSolution: c => MakePascalCaseAsync(context.Document, declaration, c),
                     equivalenceKey: title),
                 diagnostic);
         }
 
-        private async Task<Solution> PrefixWithUnderscoreAndMakeCamelCaseAsync(Document document, VariableDeclaratorSyntax field, CancellationToken cancellationToken) {
+        private async Task<Solution> MakePascalCaseAsync(Document document, VariableDeclaratorSyntax field, CancellationToken cancellationToken) {
             var identifierToken = field.Identifier;
 
-            var newName = PrivateFieldAnalyzer.GetCorrectFieldName(identifierToken.Text);
+            var newName = FieldNameAnalyzer.GetCorrectPascalName(identifierToken.Text);
 
             // Get the symbol representing the type to be renamed.
             var semanticModel = await document.GetSemanticModelAsync(cancellationToken);
