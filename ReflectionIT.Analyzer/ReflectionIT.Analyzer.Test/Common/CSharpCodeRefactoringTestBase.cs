@@ -113,8 +113,9 @@ namespace RefactoringEssentials.Tests.CSharp.CodeRefactorings
             Document doc;
             CSharpDiagnosticTestBase.TestWorkspace workspace;
             var actions = GetActions(action, input, out workspace, out doc, parseOptions);
-            if (actions.Count < actionIndex)
+            if (actions.Count < actionIndex) {
                 Console.WriteLine("invalid input is:" + input);
+            }
 
             var a = actions.ElementAtOrDefault(actionIndex);
             if (a == null) {
@@ -126,8 +127,10 @@ namespace RefactoringEssentials.Tests.CSharp.CodeRefactorings
                 op.Apply(workspace, default(CancellationToken));
             }
             var result = workspace.CurrentSolution.GetDocument(doc.Id).GetTextAsync().Result.ToString();
-            if (Environment.NewLine != "\r\n")
+            if (Environment.NewLine != "\r\n") {
                 result = result.Replace("\r\n", Environment.NewLine);
+            }
+
             return result;
         }
 

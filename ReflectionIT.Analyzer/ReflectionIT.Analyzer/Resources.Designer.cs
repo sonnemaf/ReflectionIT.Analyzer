@@ -224,6 +224,33 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameter &apos;{0}&apos; in public method of public type should not be Optional. Use Overloading instead..
+        /// </summary>
+        internal static string OptionalParameterInPublicClassPublicMethodAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("OptionalParameterInPublicClassPublicMethodAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optional parameters in public methods of public types..
+        /// </summary>
+        internal static string OptionalParameterInPublicClassPublicMethodAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("OptionalParameterInPublicClassPublicMethodAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optional parameters in public methods of public types should not be used. Use Overloading instead..
+        /// </summary>
+        internal static string OptionalParameterInPublicClassPulicMethodAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("OptionalParameterInPublicClassPulicMethodAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Private fields must start with an underscore and camelCased.
         /// </summary>
         internal static string PrivateFieldAnalyzerDescription {

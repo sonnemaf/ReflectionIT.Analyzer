@@ -94,8 +94,9 @@ namespace RefactoringEssentials.Tests
             {
                 base.ApplyDocumentTextChanged(id, text);
                 var document = CurrentSolution.GetDocument(id);
-                if (document != null)
+                if (document != null) {
                     OnDocumentTextChanged(id, text, PreservationMode.PreserveValue);
+                }
             }
 
             public override bool CanApplyChange(ApplyChangesKind feature)
@@ -257,12 +258,14 @@ namespace RefactoringEssentials.Tests
                 {
                     Assert.Fail("Diagnostic " + i + " span mismatch expected: " + expectedDiagnosics[i] + " but was " + wholeSpan);
                 }
-                if (diagnosticCheck != null)
+                if (diagnosticCheck != null) {
                     diagnosticCheck(i, d);
+                }
             }
 
-            if (output == null)
+            if (output == null) {
                 return;
+            }
 
             var workspace = new TestWorkspace();
             var projectId = ProjectId.CreateNewId();
@@ -373,12 +376,14 @@ namespace RefactoringEssentials.Tests
                 {
                     Assert.Fail("Diagnostic " + i + " span mismatch expected: " + expectedDiagnosics[i] + " but was " + wholeSpan);
                 }
-                if (diagnosticCheck != null)
+                if (diagnosticCheck != null) {
                     diagnosticCheck(i, d);
+                }
             }
 
-            if (output == null)
+            if (output == null) {
                 return;
+            }
 
             var workspace = new TestWorkspace();
             var projectId = ProjectId.CreateNewId();

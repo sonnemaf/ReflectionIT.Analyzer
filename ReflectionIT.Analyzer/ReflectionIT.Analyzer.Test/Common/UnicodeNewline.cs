@@ -105,13 +105,17 @@ namespace RefactoringEssentials
         {
             if (curChar == CR)
             {
-                if (nextChar != null && nextChar() == LF)
+                if (nextChar != null && nextChar() == LF) {
                     return 2;
+                }
+
                 return 1;
             }
 
-            if (curChar == LF || curChar == NEL || curChar == VT || curChar == FF || curChar == LS || curChar == PS)
+            if (curChar == LF || curChar == NEL || curChar == VT || curChar == FF || curChar == LS || curChar == PS) {
                 return 1;
+            }
+
             return 0;
         }
 
@@ -125,13 +129,17 @@ namespace RefactoringEssentials
         {
             if (curChar == CR)
             {
-                if (nextChar == LF)
+                if (nextChar == LF) {
                     return 2;
+                }
+
                 return 1;
             }
 
-            if (curChar == LF || curChar == NEL || curChar == VT || curChar == FF || curChar == LS || curChar == PS)
+            if (curChar == LF || curChar == NEL || curChar == VT || curChar == FF || curChar == LS || curChar == PS) {
                 return 1;
+            }
+
             return 0;
         }
 
@@ -263,8 +271,10 @@ namespace RefactoringEssentials
             switch (curChar)
             {
                 case CR:
-                    if (nextChar != null && nextChar() == LF)
+                    if (nextChar != null && nextChar() == LF) {
                         return UnicodeNewline.CRLF;
+                    }
+
                     return UnicodeNewline.CR;
                 case LF:
                     return UnicodeNewline.LF;
@@ -293,8 +303,10 @@ namespace RefactoringEssentials
             switch (curChar)
             {
                 case CR:
-                    if (nextChar == LF)
+                    if (nextChar == LF) {
                         return UnicodeNewline.CRLF;
+                    }
+
                     return UnicodeNewline.CR;
                 case LF:
                     return UnicodeNewline.LF;
@@ -380,8 +392,9 @@ namespace RefactoringEssentials
                 }
                 sb.Append(ch);
             }
-            if (sb.Length > 0)
+            if (sb.Length > 0) {
                 result.Add(sb.ToString());
+            }
 
             return result.ToArray();
         }

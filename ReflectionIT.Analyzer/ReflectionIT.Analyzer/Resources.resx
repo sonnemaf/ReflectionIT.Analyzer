@@ -189,6 +189,18 @@
     <value>Non Private field must be PascalCased</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="OptionalParameterInPublicClassPublicMethodAnalyzerMessageFormat" xml:space="preserve">
+    <value>Parameter '{0}' in public method of public type should not be Optional. Use Overloading instead.</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
+  <data name="OptionalParameterInPublicClassPublicMethodAnalyzerTitle" xml:space="preserve">
+    <value>Optional parameters in public methods of public types.</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
+  <data name="OptionalParameterInPublicClassPulicMethodAnalyzerDescription" xml:space="preserve">
+    <value>Optional parameters in public methods of public types should not be used. Use Overloading instead.</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
   <data name="PrivateFieldAnalyzerDescription" xml:space="preserve">
     <value>Private fields must start with an underscore and camelCased</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>

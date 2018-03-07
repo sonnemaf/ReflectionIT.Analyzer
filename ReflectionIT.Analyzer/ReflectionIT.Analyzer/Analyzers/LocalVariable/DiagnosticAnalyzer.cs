@@ -31,7 +31,6 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
         }
 
         private static void AnalyzeNode(SyntaxNodeAnalysisContext context) {
-            // TODO: Replace the following code with your own analysis, generating Diagnostic objects for any issues you find
             var localVar = (LocalDeclarationStatementSyntax)context.Node;
             foreach (var item in localVar.Declaration.Variables) {
 

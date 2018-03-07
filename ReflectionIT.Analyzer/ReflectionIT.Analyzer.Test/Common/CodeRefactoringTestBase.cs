@@ -21,8 +21,9 @@ namespace RefactoringEssentials.Tests
                 if (possibleNewline > 0)
                 {
                     sb.AppendLine();
-                    if (possibleNewline == 2)
+                    if (possibleNewline == 2) {
                         i++;
+                    }
                 }
                 else
                 {
