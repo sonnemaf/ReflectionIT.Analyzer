@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis.Text;
 using ReflectionIT.Analyzer.Helpers;
 
 namespace ReflectionIT.Analyzer.Refactorings {
+
     [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(SortMembers)), Shared]
     public class SortMembers : CodeRefactoringProvider {
 
@@ -26,7 +27,7 @@ namespace ReflectionIT.Analyzer.Refactorings {
             var node = root.FindNode(context.Span);
 
             // Only offer a refactoring if the selected node is a ClassDeclarationSyntax
-            var clsDecl = node as ClassDeclarationSyntax;
+            var clsDecl = node as TypeDeclarationSyntax;
             if (clsDecl == null) {
                 return;
             }
@@ -38,7 +39,7 @@ namespace ReflectionIT.Analyzer.Refactorings {
             context.RegisterRefactoring(action);
         }
 
-        private async Task<Document> SortMembersAsync(Document document, ClassDeclarationSyntax clsDecl, CancellationToken cancellationToken) {
+        private async Task<Document> SortMembersAsync(Document document, TypeDeclarationSyntax clsDecl, CancellationToken cancellationToken) {
 
             // Sort Fields
             var fieldsOld = clsDecl.ChildNodes().OfType<FieldDeclarationSyntax>().ToArray();
