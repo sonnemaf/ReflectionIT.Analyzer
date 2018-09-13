@@ -11,7 +11,7 @@
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>ReflectionIT.Analyzer</description>
-    <releaseNotes>OptionalParameterInPublicClassPublicMethodAnalyzer added</releaseNotes>
+    <releaseNotes>NullCheckAnalyzer added</releaseNotes>
     <copyright>Copyright Reflection IT BV</copyright>
     <tags>ReflectionIT.Analyzer, analyzers, CSharp</tags>
   </metadata>

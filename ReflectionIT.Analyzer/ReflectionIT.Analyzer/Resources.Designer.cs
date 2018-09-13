@@ -224,6 +224,33 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Null cheks should use &apos;is null&apos;, the == and != operators could be (incorrectly) overloaded.
+        /// </summary>
+        internal static string NullCheckAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("NullCheckAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0} {1} null&apos; check should be written as &apos;{2}{0} is null{3}&apos;, the {1} operator could be (incorrectly) overloaded.
+        /// </summary>
+        internal static string NullCheckAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("NullCheckAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrect null check.
+        /// </summary>
+        internal static string NullCheckAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("NullCheckAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Parameter &apos;{0}&apos; in public method of public type should not be Optional. Use Overloading instead..
         /// </summary>
         internal static string OptionalParameterInPublicClassPublicMethodAnalyzerMessageFormat {

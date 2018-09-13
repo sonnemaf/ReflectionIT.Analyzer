@@ -44,6 +44,8 @@
     <Compile Include="Analyzers\AsyncMethodNameSuffix\DiagnosticAnalyzer.cs" />
     <Compile Include="Analyzers\ExplicitTypecast\ExplicitReturnTypecastCodeFix.cs" />
     <Compile Include="Analyzers\ExplicitTypecast\ExplicitTypecastCodeFix.cs" />
+    <Compile Include="Analyzers\NullCheckAnalyzer\CodeFixProvider.cs" />
+    <Compile Include="Analyzers\NullCheckAnalyzer\DiagnosticAnalyzer.cs" />
     <Compile Include="Analyzers\MissingModifiers\CodeFixProvider.cs" />
     <Compile Include="Analyzers\MissingModifiers\DiagnosticAnalyzer.cs" />
     <Compile Include="Analyzers\NonPrivateField\CodeFixProvider.cs" />
