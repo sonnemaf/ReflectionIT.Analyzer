@@ -38,14 +38,14 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedDocument: c => ReplaceEqualsWithIsAsync(context.Document, root, declaration),
+                    createChangedDocument: c => ReplaceEqualsWithIsAsync(context.Document, declaration, context.CancellationToken),
                     equivalenceKey: title),
                 diagnostic);
 
 
         }
 
-        private Task<Document> ReplaceEqualsWithIsAsync(Document document, SyntaxNode root, BinaryExpressionSyntax comp) {
+        private async Task<Document> ReplaceEqualsWithIsAsync(Document document, BinaryExpressionSyntax comp, CancellationToken c) {
 
             SyntaxNode newOperatorToken =  SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, comp.Left, comp.Right);
 
@@ -55,9 +55,10 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             }
 
             /// Replace old with new
+            var root = await document.GetSyntaxRootAsync(c).ConfigureAwait(false);
             var newRoot = root.ReplaceNode(comp, newOperatorToken);
 
-            return Task.FromResult(document.WithSyntaxRoot(newRoot));
+            return document.WithSyntaxRoot(newRoot);
         }
     }
 }

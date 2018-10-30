@@ -34,6 +34,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
                 
             }
 
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.RegisterSyntaxNodeAction(AnalyzeNodeEquals, SyntaxKind.EqualsExpression);
             context.RegisterSyntaxNodeAction(AnalyzeNodeNotEquals, SyntaxKind.NotEqualsExpression);
         }

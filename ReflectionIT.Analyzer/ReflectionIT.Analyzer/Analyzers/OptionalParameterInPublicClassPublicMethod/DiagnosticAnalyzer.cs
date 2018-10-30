@@ -28,6 +28,7 @@ namespace ReflectionIT.Analyzer.Analyzers.OptionalParameterInPublicClassPublicMe
         public override void Initialize(AnalysisContext context) {
             // TODO: Consider registering other actions that act on syntax instead of or in addition to symbols
             //context.RegisterSymbolAction(AnalyzeSymbol, SymbolKind.Parameter);
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.Parameter);
         }
 

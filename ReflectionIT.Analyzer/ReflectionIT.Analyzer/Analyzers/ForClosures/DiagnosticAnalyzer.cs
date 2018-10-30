@@ -28,6 +28,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(_rule); } }
 
         public override void Initialize(AnalysisContext context) {
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.ForStatement);
         }
 

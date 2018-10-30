@@ -38,6 +38,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public override void Initialize(AnalysisContext context) {
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.RegisterSyntaxNodeAction(HandleClass, SyntaxKind.ClassDeclaration);
             context.RegisterSyntaxNodeAction(HandleConstructor, SyntaxKind.ConstructorDeclaration);
             context.RegisterSyntaxNodeAction(HandleDelegate, SyntaxKind.DelegateDeclaration);
