@@ -1,10 +1,4 @@
-﻿using System;
-using System.Composition;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeRefactorings;
@@ -12,10 +6,14 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Text;
-
-using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
-
 using ReflectionIT.Analyzer.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Composition;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace ReflectionIT.Analyzer.Refactorings {
     [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(AutoPropertyToPrivateFieldWithPropertyAndOnPropertyChanged)), Shared]
@@ -28,8 +26,7 @@ namespace ReflectionIT.Analyzer.Refactorings {
             var node = root.FindNode(context.Span);
 
             // Only offer a refactoring if the selected node is a PropertyDeclarationSyntax
-            var propDecl = node as PropertyDeclarationSyntax;
-            if (propDecl == null) {
+            if (!(node is PropertyDeclarationSyntax propDecl)) {
                 return;
             }
 

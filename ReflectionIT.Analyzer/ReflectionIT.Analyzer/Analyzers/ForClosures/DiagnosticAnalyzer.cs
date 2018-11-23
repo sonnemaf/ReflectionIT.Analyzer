@@ -1,12 +1,12 @@
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
@@ -23,7 +23,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
         private static readonly LocalizableString _description = new LocalizableResourceString(nameof(Resources.ForClosureAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
         private const string Category = DiagnosticAnalyzerCategories.Naming;
 
-        private static DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
+        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(_rule); } }
 
@@ -36,14 +36,15 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
             var fss = (ForStatementSyntax)context.Node;
 
             var sem = context.SemanticModel;
+            if (sem != null) {
+                var variables = fss.Declaration.Variables;
 
-            var variables = fss.Declaration.Variables;
+                var symbols = new HashSet<ISymbol>(variables.Select(variable => sem.GetDeclaredSymbol(variable)));
 
-            var symbols = new HashSet<ISymbol>(variables.Select(variable => sem.GetDeclaredSymbol(variable)));
+                var johnny = new Johnny(context, sem, symbols);
 
-            var johnny = new Johnny(context, sem, symbols);
-
-            johnny.Visit(fss.Statement);
+                johnny.Visit(fss.Statement);
+            }
         }
 
         class Johnny : CSharpSyntaxWalker {

@@ -26,8 +26,8 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
 
         private const string Category = DiagnosticAnalyzerCategories.Naming;
 
-        private static DiagnosticDescriptor _rulePrivate = new DiagnosticDescriptor(DiagnosticIdPrivateField, _titlePrivateField, _messageFormatPrivateField, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _descriptionPrivateField);
-        private static DiagnosticDescriptor _ruleNonPrivate = new DiagnosticDescriptor(DiagnosticIdPascalName, _titleNonPrivateField, _messageFormatNonPrivateField, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _descriptionNonPrivateField);
+        private static readonly DiagnosticDescriptor _rulePrivate = new DiagnosticDescriptor(DiagnosticIdPrivateField, _titlePrivateField, _messageFormatPrivateField, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _descriptionPrivateField);
+        private static readonly DiagnosticDescriptor _ruleNonPrivate = new DiagnosticDescriptor(DiagnosticIdPascalName, _titleNonPrivateField, _messageFormatNonPrivateField, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _descriptionNonPrivateField);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(_rulePrivate, _ruleNonPrivate); } }
 

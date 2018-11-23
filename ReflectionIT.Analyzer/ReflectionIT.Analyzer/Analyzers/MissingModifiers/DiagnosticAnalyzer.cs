@@ -25,7 +25,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
 
         private const string Category = DiagnosticAnalyzerCategories.PracticesAndImprovements;
 
-        private static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
+        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
 
         private readonly SyntaxKind[] _accessModifierKinds =
         {
@@ -35,7 +35,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             SyntaxKind.PrivateKeyword
         };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(_rule); } }
 
         public override void Initialize(AnalysisContext context) {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
@@ -57,7 +57,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             var declarationExpression = (ClassDeclarationSyntax)context.Node;
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds)) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.Identifier.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.Identifier.GetLocation(),
                     declarationExpression.Identifier.Text));
             }
         }
@@ -66,7 +66,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             var declarationExpression = (StructDeclarationSyntax)context.Node;
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds)) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.Identifier.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.Identifier.GetLocation(),
                     declarationExpression.Identifier.Text));
             }
         }
@@ -75,7 +75,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             var declarationExpression = (EnumDeclarationSyntax)context.Node;
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds)) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.Identifier.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.Identifier.GetLocation(),
                     declarationExpression.Identifier.Text));
             }
         }
@@ -84,7 +84,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             var declarationExpression = (DelegateDeclarationSyntax)context.Node;
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds)) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.Identifier.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.Identifier.GetLocation(),
                     declarationExpression.Identifier.Text));
             }
         }
@@ -93,7 +93,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             var declarationExpression = (InterfaceDeclarationSyntax)context.Node;
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds)) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.Identifier.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.Identifier.GetLocation(),
                     declarationExpression.Identifier.Text));
             }
         }
@@ -101,7 +101,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
         private void HandleField(SyntaxNodeAnalysisContext context) {
             var declarationExpression = (FieldDeclarationSyntax)context.Node;
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds)) {
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.GetLocation(), declarationExpression.Declaration.Variables.First().Identifier.Value));
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.GetLocation(), declarationExpression.Declaration.Variables.First().Identifier.Value));
                 //context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.GetLocation(), "private"));
             }
         }
@@ -115,7 +115,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds) &&
                 declarationExpression.ExplicitInterfaceSpecifier == null) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.Identifier.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.Identifier.GetLocation(),
                     declarationExpression.Identifier.Text));
             }
         }
@@ -130,7 +130,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
                 !declarationExpression.Modifiers.Contains(SyntaxKind.PartialKeyword) &&
                 declarationExpression.ExplicitInterfaceSpecifier == null) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.Identifier.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.Identifier.GetLocation(),
                     declarationExpression.Identifier.Text));
             }
         }
@@ -140,7 +140,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds) &&
                 !declarationExpression.Modifiers.Contains(SyntaxKind.StaticKeyword)) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.Identifier.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.Identifier.GetLocation(),
                     "constructor"));
             }
         }
@@ -152,7 +152,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
 
             var declarationExpression = (EventFieldDeclarationSyntax)context.Node;
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds)) {
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.GetLocation(), declarationExpression.Declaration.Variables.First().Identifier.Value));
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.GetLocation(), declarationExpression.Declaration.Variables.First().Identifier.Value));
             }
         }
 
@@ -164,7 +164,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             var declarationExpression = (EventDeclarationSyntax)context.Node;
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds)) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.Identifier.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.Identifier.GetLocation(),
                     declarationExpression.Identifier.Text));
             }
         }
@@ -178,7 +178,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             if (!declarationExpression.Modifiers.ContainsAny(_accessModifierKinds) &&
                 declarationExpression.ExplicitInterfaceSpecifier == null) {
                 var accessibility = context.SemanticModel.GetDeclaredSymbol(declarationExpression).DeclaredAccessibility;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, declarationExpression.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(_rule, declarationExpression.GetLocation(),
                     "indexer"));
             }
         }

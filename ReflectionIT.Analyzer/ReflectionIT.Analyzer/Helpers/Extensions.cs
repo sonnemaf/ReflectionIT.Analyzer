@@ -19,7 +19,7 @@ namespace ReflectionIT.Analyzer.Helpers {
             return node;
         }
 
-        private static readonly Dictionary<string, string> AliasMapping = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> _aliasMapping = new Dictionary<string, string>
         {
             { nameof(Int16), "short" },
             { nameof(Int32), "int" },
@@ -119,8 +119,8 @@ namespace ReflectionIT.Analyzer.Helpers {
                 throw new ArgumentNullException(nameof(type));
             }
 
-            string foundValue;
-            if (AliasMapping.TryGetValue(type, out foundValue)) {
+            if (_aliasMapping.TryGetValue(type, out var foundValue))
+            {
                 return foundValue;
             }
 
@@ -132,7 +132,7 @@ namespace ReflectionIT.Analyzer.Helpers {
                 throw new ArgumentNullException(nameof(type));
             }
 
-            return AliasMapping.TryGetValue(type, out alias);
+            return _aliasMapping.TryGetValue(type, out alias);
         }
 
         /// <summary>
