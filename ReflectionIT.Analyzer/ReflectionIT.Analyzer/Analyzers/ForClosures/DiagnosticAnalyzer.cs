@@ -36,7 +36,8 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
             var fss = (ForStatementSyntax)context.Node;
 
             var sem = context.SemanticModel;
-            if (sem != null) {
+            // if variables are declared outside the for loop, the Declaration property is null.
+            if (sem != null && fss.Declaration != null) {
                 var variables = fss.Declaration.Variables;
 
                 var symbols = new HashSet<ISymbol>(variables.Select(variable => sem.GetDeclaredSymbol(variable)));
