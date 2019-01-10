@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Text;
-using ReflectionIT.Analyzer.Helpers;
+//using ReflectionIT.Analyzer.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Composition;
@@ -16,8 +16,8 @@ using System.Threading.Tasks;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace ReflectionIT.Analyzer.Refactorings {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(AutoPropertyToPrivateFieldWithPropertyAndOnPropertyChanged)), Shared]
-    public class AutoPropertyToFullProperty : CodeRefactoringProvider {
+    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(AutoPropertyToPrivateFieldWithPropertyAndOnPropertyChangedRefactoringProvider)), Shared]
+    public class AutoPropertyToFullPropertyRefactoringProvider : CodeRefactoringProvider {
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context) {
             var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);

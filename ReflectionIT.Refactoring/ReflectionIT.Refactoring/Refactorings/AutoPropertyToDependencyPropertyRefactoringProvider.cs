@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Text;
-using ReflectionIT.Analyzer.Helpers;
+//using ReflectionIT.Analyzer.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Composition;
@@ -18,8 +18,8 @@ using System.Threading.Tasks;
 
 namespace ReflectionIT.Analyzer.Refactorings {
 
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(AutoPropertyToDependencyProperty)), Shared]
-    public class AutoPropertyToDependencyProperty : CodeRefactoringProvider {
+    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = nameof(AutoPropertyToDependencyPropertyRefactoringProvider)), Shared]
+    public class AutoPropertyToDependencyPropertyRefactoringProvider : CodeRefactoringProvider {
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context) {
             var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
