@@ -248,22 +248,9 @@ namespace ReflectionIT.Analyzer.Refactorings {
                                                             SyntaxFactory.SeparatedList<ArgumentSyntax>(
                                                                 new SyntaxNodeOrToken[]{
                                                                     SyntaxFactory.Argument(
-                                                                        autoProperty.Initializer == null ?
-                                                                        SyntaxFactory.ObjectCreationExpression(
-                                                                            SyntaxFactory.IdentifierName(type))
-                                                                        .WithNewKeyword(
-                                                                            SyntaxFactory.Token(
-                                                                                SyntaxKind.NewKeyword))
-                                                                        .WithArgumentList(
-                                                                            SyntaxFactory.ArgumentList()
-                                                                            .WithOpenParenToken(
-                                                                                SyntaxFactory.Token(
-                                                                                    SyntaxKind.OpenParenToken))
-                                                                            .WithCloseParenToken(
-                                                                                SyntaxFactory.Token(
-                                                                                    SyntaxKind.CloseParenToken))) as ExpressionSyntax
-                                                                                    :
-                                                                        SyntaxFactory.LiteralExpression(
+                                                                        autoProperty.Initializer == null
+                                                                        ? SyntaxFactory.DefaultExpression(SyntaxFactory.IdentifierName(type)) as ExpressionSyntax
+                                                                        : SyntaxFactory.LiteralExpression(
                                                                         SyntaxKind.NumericLiteralExpression,
                                                                         SyntaxFactory.Literal(
                                                                             SyntaxFactory.TriviaList(),
