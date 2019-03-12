@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="ReflectionIT.Analyzer.Vsix..9141f8bd-0903-4c24-a643-ac62962dc6b4" Version="3.0" Language="en-US" Publisher="FonsS"/>
+        <Identity Id="ReflectionIT.Analyzer.Vsix..9141f8bd-0903-4c24-a643-ac62962dc6b4"
+                  Version="3.1" Language="en-US" Publisher="Fons Sonnemans"/>
         <DisplayName>ReflectionIT.Analyzer</DisplayName>
         <Description xml:space="preserve">Reflection IT Code Analyzer with Fixes</Description>
     </Metadata>
@@ -16,7 +17,7 @@
         <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="ReflectionIT.Analyzer" Path="|ReflectionIT.Analyzer|"/>
     </Assets>
     <Prerequisites>
-        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,16.0)" DisplayName="Visual Studio core editor" />
-        <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.LanguageServices" Version="[15.0,16.0)" DisplayName="Roslyn Language Services" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,17.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.LanguageServices" Version="[15.0,17.0)" DisplayName="Roslyn Language Services" />
     </Prerequisites>
 </PackageManifest>

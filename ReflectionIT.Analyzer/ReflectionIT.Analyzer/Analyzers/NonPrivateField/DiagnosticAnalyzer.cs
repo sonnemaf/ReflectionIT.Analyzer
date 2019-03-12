@@ -35,8 +35,10 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             // TODO: Replace the following code with your own analysis, generating Diagnostic objects for any issues you find
             var field = (IFieldSymbol)context.Symbol;
 
+            //var parentType = field.ContainingType.IsReferenceType;
+
             // Find fields (not constants) with invalid names
-            if (field.DeclaredAccessibility != Accessibility.Private && !field.IsConst && !field.IsReadOnly) {
+            if (field.DeclaredAccessibility != Accessibility.Private && !field.IsConst && !field.IsReadOnly && field.ContainingType.IsReferenceType) {
 
                 // For all such symbols, produce a diagnostic.
                 var diagnostic = Diagnostic.Create(_rule, field.Locations[0], field.Name);

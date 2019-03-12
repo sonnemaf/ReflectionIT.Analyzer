@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(PrivateFieldCodeFixProvider)), Shared]
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NullCheckCodeFixProvider)), Shared]
     public class NullCheckCodeFixProvider : CodeFixProvider {
-        private const string title = "Fix null check";
+        private const string Title = "Fix null check";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds {
             get { return ImmutableArray.Create(NullCheckAnalyzer.DiagnosticId); }
@@ -37,9 +37,9 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: title,
+                    title: Title,
                     createChangedDocument: c => ReplaceEqualsWithIsAsync(context.Document, declaration, context.CancellationToken),
-                    equivalenceKey: title),
+                    equivalenceKey: Title),
                 diagnostic);
 
 
