@@ -36,14 +36,14 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
             var fss = (ForStatementSyntax)context.Node;
 
             var sem = context.SemanticModel;
-            if (sem != null) {
+            if (fss != null && fss.Declaration != null && sem != null) {
                 var variables = fss.Declaration.Variables;
 
-                var symbols = new HashSet<ISymbol>(variables.Select(variable => sem.GetDeclaredSymbol(variable)));
-
-                var johnny = new Johnny(context, sem, symbols);
-
-                johnny.Visit(fss.Statement);
+                if (variables != null) {
+                    var symbols = new HashSet<ISymbol>(variables.Select(variable => sem.GetDeclaredSymbol(variable)));
+                    var johnny = new Johnny(context, sem, symbols);
+                    johnny.Visit(fss.Statement);
+                }
             }
         }
 

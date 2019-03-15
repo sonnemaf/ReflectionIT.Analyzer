@@ -17,12 +17,11 @@
     <RepositoryUrl>https://github.com/sonnemaf/ReflectionIT.Analyzer</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>ReflectionIT.Analyzer</Description>
-    <PackageReleaseNotes>Naming analyzers removed, you should use the .EditorConfig instead
-Public Fields in Structs are allowed</PackageReleaseNotes>
+    <PackageReleaseNotes>NullReferenceException in ForClosureAnalyzer bug solved</PackageReleaseNotes>
     <Copyright>Copyright</Copyright>
     <PackageTags>ReflectionIT.Analyzer, analyzers, CSharp</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <Version>1.5.2.0</Version>
+    <Version>1.5.3.0</Version>
     <Company>Reflection IT</Company>
   </PropertyGroup>
 
