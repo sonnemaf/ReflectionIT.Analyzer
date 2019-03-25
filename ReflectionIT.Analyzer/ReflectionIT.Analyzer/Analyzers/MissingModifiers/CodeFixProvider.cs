@@ -22,11 +22,9 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MissingModifiersCodeFixProvider)), Shared]
     public class MissingModifiersCodeFixProvider : CodeFixProvider {
 
-        private const string title = "Add modifier";
+        private const string Title = "Add modifier";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds {
-            get { return ImmutableArray.Create(MissingModifiersAnalyzer.DiagnosticId); }
-        }
+        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MissingModifiersAnalyzer.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider() {
             return WellKnownFixAllProviders.BatchFixer;
@@ -48,9 +46,9 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(title, 
+                CodeAction.Create(Title, 
                                   x => AddModifierAsync(context.Document, root, statement, accessibility), 
-                                  title), diagnostic);
+                                  Title), diagnostic);
         }
 
         private Task<Solution> AddModifierAsync(Document document, SyntaxNode root, SyntaxNode statement,

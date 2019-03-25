@@ -129,6 +129,18 @@
     <value>Async method should be named with an Async suffix</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="AutoPropertiesInStructsAnalyzerDescription" xml:space="preserve">
+    <value>Struct must use Fields and not Auto Properties</value>
+    <comment>An optional longer localizable description of the diagnostic.</comment>
+  </data>
+  <data name="AutoPropertiesInStructsAnalyzerMessageFormat" xml:space="preserve">
+    <value>Auto Property '{0}' in Struct must be a Field</value>
+    <comment>The format-able message the diagnostic displays.</comment>
+  </data>
+  <data name="AutoPropertiesInStructsAnalyzerTitle" xml:space="preserve">
+    <value>Struct must use Fields and not Auto Properties</value>
+    <comment>The title of the diagnostic.</comment>
+  </data>
   <data name="ForClosureAnalyzerDescription" xml:space="preserve">
     <value>Loop variables possibly incorrectly captured in anonymous method (or lambda) inside a loop body</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>

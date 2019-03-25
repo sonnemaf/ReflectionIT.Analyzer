@@ -89,6 +89,33 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Struct must use Fields and not Auto Properties.
+        /// </summary>
+        internal static string AutoPropertiesInStructsAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("AutoPropertiesInStructsAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto Property &apos;{0}&apos; in Struct must be a Field.
+        /// </summary>
+        internal static string AutoPropertiesInStructsAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("AutoPropertiesInStructsAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Struct must use Fields and not Auto Properties.
+        /// </summary>
+        internal static string AutoPropertiesInStructsAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("AutoPropertiesInStructsAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loop variables possibly incorrectly captured in anonymous method (or lambda) inside a loop body.
         /// </summary>
         internal static string ForClosureAnalyzerDescription {

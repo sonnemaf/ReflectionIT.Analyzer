@@ -25,7 +25,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
         private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(_rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 
         public override void Initialize(AnalysisContext context) {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);

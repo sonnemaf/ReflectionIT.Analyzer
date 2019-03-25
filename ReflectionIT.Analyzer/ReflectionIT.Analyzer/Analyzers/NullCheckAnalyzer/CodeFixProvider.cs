@@ -16,9 +16,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
     public class NullCheckCodeFixProvider : CodeFixProvider {
         private const string Title = "Fix null check";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds {
-            get { return ImmutableArray.Create(NullCheckAnalyzer.DiagnosticId); }
-        }
+        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(NullCheckAnalyzer.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider() {
             return WellKnownFixAllProviders.BatchFixer;

@@ -18,11 +18,9 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NonPrivateFieldCodeFixProvider)), Shared]
     public class NonPrivateFieldCodeFixProvider : CodeFixProvider {
 
-        private const string title = "Convert to Auto Property";
+        private const string Title = "Convert to Auto Property";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds {
-            get { return ImmutableArray.Create(NonPrivateFieldAnalyzer.DiagnosticId); }
-        }
+        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(NonPrivateFieldAnalyzer.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider() {
             return WellKnownFixAllProviders.BatchFixer;
@@ -41,9 +39,9 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: title,
+                    title: Title,
                     createChangedDocument: c => ConvertToAutoPropertyAsync(context.Document, root, declaration, c),
-                    equivalenceKey: title),
+                    equivalenceKey: Title),
                 diagnostic);
         }
 

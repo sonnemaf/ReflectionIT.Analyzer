@@ -16,11 +16,9 @@ using Microsoft.CodeAnalysis.Text;
 namespace ReflectionIT.Analyzer.Analyzers.AsyncMethodNameSuffix {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(AsyncMethodNameSuffixCodeFixProvider)), Shared]
     public class AsyncMethodNameSuffixCodeFixProvider : CodeFixProvider {
-        private const string title = "Add Async suffix to the method name";
+        private const string Title = "Add Async suffix to the method name";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds {
-            get { return ImmutableArray.Create(AsyncMethodNameSuffixAnalyzer.DiagnosticId); }
-        }
+        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(AsyncMethodNameSuffixAnalyzer.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider() {
             return WellKnownFixAllProviders.BatchFixer;
@@ -39,9 +37,9 @@ namespace ReflectionIT.Analyzer.Analyzers.AsyncMethodNameSuffix {
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: title,
+                    title: Title,
                     createChangedSolution: c => RenameAsync(context.Document, declaration, c),
-                    equivalenceKey: title),
+                    equivalenceKey: Title),
                 diagnostic);
         }
 

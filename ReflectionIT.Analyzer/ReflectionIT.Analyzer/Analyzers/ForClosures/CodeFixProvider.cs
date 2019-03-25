@@ -19,11 +19,9 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ForClosureCodeFixProvider)), Shared]
     public class ForClosureCodeFixProvider : CodeFixProvider {
-        private const string title = "Capture using local variable";
+        private const string Title = "Capture using local variable";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds {
-            get { return ImmutableArray.Create(ForClosureAnalyzer.DiagnosticId); }
-        }
+        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(ForClosureAnalyzer.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider() {
             return WellKnownFixAllProviders.BatchFixer;
@@ -39,9 +37,9 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: title,
+                    title: Title,
                     createChangedDocument: c => FixClosuresAsync(context.Document, identifier, c),
-                    equivalenceKey: title),
+                    equivalenceKey: Title),
                 diagnostic);
         }
 
@@ -102,11 +100,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
             public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node) {
                 var symbol = _model.GetSymbolInfo(node);
-                if (symbol.Symbol == _symbol) {
-                    return _newIdentifier;
-                }
-
-                return base.VisitIdentifierName(node);
+                return symbol.Symbol == _symbol ? _newIdentifier : base.VisitIdentifierName(node);
             }
         }
     }

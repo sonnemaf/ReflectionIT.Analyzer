@@ -21,7 +21,7 @@
     <Copyright>Copyright</Copyright>
     <PackageTags>ReflectionIT.Analyzer, analyzers, CSharp</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <Version>1.5.3.0</Version>
+    <Version>3.3.0.0</Version>
     <Company>Reflection IT</Company>
   </PropertyGroup>
 
@@ -29,6 +29,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.6.3" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.10.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.10.0" PrivateAssets="all" />
     <PackageReference Update="NETStandard.Library" PrivateAssets="all" />
   </ItemGroup>

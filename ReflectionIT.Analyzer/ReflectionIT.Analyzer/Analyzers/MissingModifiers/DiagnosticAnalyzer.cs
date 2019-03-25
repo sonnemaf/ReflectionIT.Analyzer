@@ -35,7 +35,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             SyntaxKind.PrivateKeyword
         };
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(_rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 
         public override void Initialize(AnalysisContext context) {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);

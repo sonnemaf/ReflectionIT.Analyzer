@@ -13,10 +13,7 @@ namespace ReflectionIT.Analyzer.Helpers {
 
         public static VariableDeclaratorSyntax WithInitializerIf(this VariableDeclaratorSyntax node, bool eval, EqualsValueClauseSyntax initializer) 
             {
-            if (eval) {
-                return node.WithInitializer(initializer);
-            }
-            return node;
+            return eval ? node.WithInitializer(initializer) : node;
         }
 
         private static readonly Dictionary<string, string> _aliasMapping = new Dictionary<string, string>
@@ -185,11 +182,9 @@ namespace ReflectionIT.Analyzer.Helpers {
                                             SemanticModel semanticModel) {
             var invokedMethod = semanticModel.GetSymbolInfo(invocation);
             var invokedType = invokedMethod.Symbol?.ContainingType;
-            if (invokedType == null) {
-                return false;
-            }
-
-            return invokedType.MetadataName == type.Name &&
+            return invokedType == null
+                ? false
+                : invokedType.MetadataName == type.Name &&
                    invokedMethod.Symbol.MetadataName == method;
         }
 
