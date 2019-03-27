@@ -32,6 +32,7 @@ namespace ReflectionIT.Analyzer.Analyzers.AutoPropertiesInStructs {
             // TODO: Replace the following code with your own analysis, generating a CodeAction for each fix to suggest
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
+            
 
             // Find the type declaration identified by the diagnostic.
             var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<PropertyDeclarationSyntax>().First();
@@ -45,18 +46,31 @@ namespace ReflectionIT.Analyzer.Analyzers.AutoPropertiesInStructs {
                 diagnostic);
         }
 
-        private Task<Document> ConvertToFieldAsync(Document document, SyntaxNode root, PropertyDeclarationSyntax property, CancellationToken cancellationToken) {
+        private async Task<Document> ConvertToFieldAsync(Document document, SyntaxNode root, PropertyDeclarationSyntax property, CancellationToken cancellationToken) {
+
+
+            var sm = await document.GetSemanticModelAsync();
+            var ps = sm.GetDeclaredSymbol(property) as IPropertySymbol;
+
+            IEnumerable<SyntaxToken> GetModifiers() {
+                foreach (var item in property.Modifiers) {
+                    yield return item;
+                }
+                if (ps.IsReadOnly) {
+                    yield return SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword);
+                }
+            }
 
             var field = SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(property.Type).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                    SyntaxFactory.VariableDeclarator(property.Identifier))))
-                .WithModifiers(property.Modifiers);
-                
+                            SyntaxFactory.VariableDeclarator(property.Identifier))))
+                                .WithModifiers(SyntaxFactory.TokenList(GetModifiers()));
+
             // Replace old with new
             var newRoot = root.ReplaceNode(property, field);
 
             var newDocument = document.WithSyntaxRoot(newRoot);
 
-            return Task.FromResult(newDocument);
+            return newDocument;
 
         }
 

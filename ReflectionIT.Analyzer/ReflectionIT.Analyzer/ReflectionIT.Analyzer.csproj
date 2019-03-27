@@ -17,11 +17,11 @@
     <RepositoryUrl>https://github.com/sonnemaf/ReflectionIT.Analyzer</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>ReflectionIT.Analyzer</Description>
-    <PackageReleaseNotes>NullReferenceException in ForClosureAnalyzer bug solved</PackageReleaseNotes>
+    <PackageReleaseNotes>AutoPropertiesInStructsAnalyzer added (Use field instead)</PackageReleaseNotes>
     <Copyright>Copyright</Copyright>
     <PackageTags>ReflectionIT.Analyzer, analyzers, CSharp</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <Version>3.3.0.0</Version>
+    <Version>3.3.1.0</Version>
     <Company>Reflection IT</Company>
   </PropertyGroup>
 
