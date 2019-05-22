@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28902.138
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionIT.Analyzer", "ReflectionIT.Analyzer\ReflectionIT.Analyzer\ReflectionIT.Analyzer.csproj", "{1CBD1D3D-5239-47D5-B6F5-E089DD51D1C1}"
 EndProject
@@ -10,6 +10,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionIT.Refactoring", "ReflectionIT.Refactoring\ReflectionIT.Refactoring\ReflectionIT.Refactoring.csproj", "{5536036B-30DC-4921-B9CF-75758611A769}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionIT.Refactoring.Vsix", "ReflectionIT.Refactoring\ReflectionIT.Refactoring.Vsix\ReflectionIT.Refactoring.Vsix.csproj", "{6BA35A42-43E4-4AAE-BE8E-15AC877EBE2B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionIT.Analyzer.Structs", "ReflectionIT.Analyzer.Structs\ReflectionIT.Analyzer.Structs\ReflectionIT.Analyzer.Structs.csproj", "{7B4E4BBC-32F4-4601-8942-72F37A3C1E7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionIT.Analyzer.Structs.Vsix", "ReflectionIT.Analyzer.Structs\ReflectionIT.Analyzer.Structs.Vsix\ReflectionIT.Analyzer.Structs.Vsix.csproj", "{96473D39-0C9F-4EC0-AC60-3CDA76715257}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzer", "Analyzer", "{F585D577-CCA8-4A74-93AD-E22D218E2112}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzer.Structs", "Analyzer.Structs", "{415A99ED-D77F-457C-910D-D5E5C87BD4CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refactoring", "Refactoring", "{E7C2F771-00F9-436A-8598-55A23E08A090}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +43,25 @@ Global
 		{6BA35A42-43E4-4AAE-BE8E-15AC877EBE2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BA35A42-43E4-4AAE-BE8E-15AC877EBE2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BA35A42-43E4-4AAE-BE8E-15AC877EBE2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B4E4BBC-32F4-4601-8942-72F37A3C1E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B4E4BBC-32F4-4601-8942-72F37A3C1E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B4E4BBC-32F4-4601-8942-72F37A3C1E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4E4BBC-32F4-4601-8942-72F37A3C1E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96473D39-0C9F-4EC0-AC60-3CDA76715257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96473D39-0C9F-4EC0-AC60-3CDA76715257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96473D39-0C9F-4EC0-AC60-3CDA76715257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96473D39-0C9F-4EC0-AC60-3CDA76715257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1CBD1D3D-5239-47D5-B6F5-E089DD51D1C1} = {F585D577-CCA8-4A74-93AD-E22D218E2112}
+		{CC099EEA-21E2-4917-88FB-CD632F56EBBA} = {F585D577-CCA8-4A74-93AD-E22D218E2112}
+		{5536036B-30DC-4921-B9CF-75758611A769} = {E7C2F771-00F9-436A-8598-55A23E08A090}
+		{6BA35A42-43E4-4AAE-BE8E-15AC877EBE2B} = {E7C2F771-00F9-436A-8598-55A23E08A090}
+		{7B4E4BBC-32F4-4601-8942-72F37A3C1E7C} = {415A99ED-D77F-457C-910D-D5E5C87BD4CE}
+		{96473D39-0C9F-4EC0-AC60-3CDA76715257} = {415A99ED-D77F-457C-910D-D5E5C87BD4CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E2359B1-A7E6-48C9-93C4-303C817453D1}

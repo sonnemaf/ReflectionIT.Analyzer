@@ -47,8 +47,7 @@ namespace ReflectionIT.Analyzer.Analyzers.AutoPropertiesInStructs {
         }
 
         private async Task<Document> ConvertToFieldAsync(Document document, SyntaxNode root, PropertyDeclarationSyntax property, CancellationToken cancellationToken) {
-
-
+           
             var sm = await document.GetSemanticModelAsync();
             var ps = sm.GetDeclaredSymbol(property) as IPropertySymbol;
 
