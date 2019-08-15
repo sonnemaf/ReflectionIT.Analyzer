@@ -45,12 +45,10 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
 
         private async Task<Document> ReplaceEqualsWithIsAsync(Document document, BinaryExpressionSyntax comp, CancellationToken c) {
 
-            SyntaxNode newOperatorToken =  SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, comp.Left, comp.Right);
+            var left = (comp.Right.Kind() == SyntaxKind.NullLiteralExpression) ? comp.Left : comp.Right;
+            var right = (comp.OperatorToken.Kind() == SyntaxKind.ExclamationEqualsToken) ? SyntaxFactory.ParseExpression("object") : SyntaxFactory.ParseExpression("null");
 
-            if (comp.OperatorToken.Kind() == SyntaxKind.ExclamationEqualsToken) {
-                newOperatorToken = SyntaxFactory.ParenthesizedExpression(newOperatorToken as ExpressionSyntax);
-                newOperatorToken = SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, newOperatorToken as ExpressionSyntax);
-            }
+            SyntaxNode newOperatorToken = SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, left, right);
 
             /// Replace old with new
             var root = await document.GetSyntaxRootAsync(c).ConfigureAwait(false);

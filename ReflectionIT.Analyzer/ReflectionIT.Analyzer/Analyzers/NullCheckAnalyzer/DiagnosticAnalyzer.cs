@@ -31,7 +31,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             }
 
             if (!(context is null)) {
-                
+
             }
 
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
@@ -42,7 +42,10 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
         private static void AnalyzeNodeEquals(SyntaxNodeAnalysisContext context) {
             var comp = (BinaryExpressionSyntax)context.Node;
             if (comp.Right.Kind() == SyntaxKind.NullLiteralExpression) {
-                var diagnostic = Diagnostic.Create(_rule, comp.GetLocation(), comp.Left.ToString(), "==", string.Empty, string.Empty);
+                var diagnostic = Diagnostic.Create(_rule, comp.GetLocation(), comp.Left.ToString(), "null", "==");
+                context.ReportDiagnostic(diagnostic);
+            } else if (comp.Left.Kind() == SyntaxKind.NullLiteralExpression) {
+                var diagnostic = Diagnostic.Create(_rule, comp.GetLocation(), comp.Right.ToString(), "null", "==");
                 context.ReportDiagnostic(diagnostic);
             }
         }
@@ -50,11 +53,14 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
         private static void AnalyzeNodeNotEquals(SyntaxNodeAnalysisContext context) {
             var comp = (BinaryExpressionSyntax)context.Node;
             if (comp.Right.Kind() == SyntaxKind.NullLiteralExpression) {
-                var diagnostic = Diagnostic.Create(_rule, comp.GetLocation(), comp.Left.ToString(), "!=", "!(", ")");
+                var diagnostic = Diagnostic.Create(_rule, comp.GetLocation(), comp.Left.ToString(), "object", "!=");
+                context.ReportDiagnostic(diagnostic);
+            } else if (comp.Left.Kind() == SyntaxKind.NullLiteralExpression) {
+                var diagnostic = Diagnostic.Create(_rule, comp.GetLocation(), comp.Right.ToString(), "object", "!=");
                 context.ReportDiagnostic(diagnostic);
             }
         }
     }
 
-   
+
 }

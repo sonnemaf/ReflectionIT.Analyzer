@@ -8,29 +8,29 @@
 
   <PropertyGroup>
     <PackageId>ReflectionIT.Analyzer</PackageId>
+    <Version>3.4</Version>
     <PackageVersion>$(Version)</PackageVersion>
     <FileVersion>$(Version)</FileVersion>
     <Authors>Fons Sonnemans</Authors>
-    <PackageLicenseUrl>https://github.com/sonnemaf/ReflectionIT.Analyzer/blob/master/License.txt</PackageLicenseUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/sonnemaf/ReflectionIT.Analyzer</PackageProjectUrl>
     <PackageIconUrl></PackageIconUrl>
     <RepositoryUrl>https://github.com/sonnemaf/ReflectionIT.Analyzer</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>ReflectionIT.Analyzer</Description>
-    <PackageReleaseNotes>AutoPropertiesInStructsAnalyzer added (Use field instead)</PackageReleaseNotes>
-    <Copyright>Copyright</Copyright>
+    <PackageReleaseNotes>Improved Null check analyzer and fix</PackageReleaseNotes>
+    <Copyright>Copyright Reflection IT</Copyright>
     <PackageTags>ReflectionIT.Analyzer, analyzers, CSharp</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <Version>3.3.1.0</Version>
     <Company>Reflection IT</Company>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.1" PrivateAssets="all">
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.4" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.0.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.2.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.2.1" />
     <PackageReference Update="NETStandard.Library" PrivateAssets="all" />
   </ItemGroup>
 

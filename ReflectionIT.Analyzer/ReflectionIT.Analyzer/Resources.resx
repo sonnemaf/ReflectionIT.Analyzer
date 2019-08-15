@@ -206,7 +206,7 @@
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NullCheckAnalyzerMessageFormat" xml:space="preserve">
-    <value>'{0} {1} null' check should be written as '{2}{0} is null{3}', the {1} operator could be (incorrectly) overloaded</value>
+    <value>'{0} {1} null' check should be written as '{0} is {1}', the {2} operator could be (incorrectly) overloaded</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NullCheckAnalyzerTitle" xml:space="preserve">
