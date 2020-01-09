@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>ReflectionIT.Analyzer</PackageId>
-    <Version>3.4</Version>
+    <Version>3.5</Version>
     <PackageVersion>$(Version)</PackageVersion>
     <FileVersion>$(Version)</FileVersion>
     <Authors>Fons Sonnemans</Authors>
@@ -17,20 +17,25 @@
     <PackageIconUrl></PackageIconUrl>
     <RepositoryUrl>https://github.com/sonnemaf/ReflectionIT.Analyzer</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>ReflectionIT.Analyzer</Description>
-    <PackageReleaseNotes>Improved Null check analyzer and fix</PackageReleaseNotes>
+    <Description>ReflectionIT.Analyzer, supports Visual Studio 2019 only (sorry)</Description>
+    <PackageReleaseNotes>Added EmptyArray analyzer for C# and VB, fix: use Array.Empty&lt;T&gt;() instead</PackageReleaseNotes>
     <Copyright>Copyright Reflection IT</Copyright>
     <PackageTags>ReflectionIT.Analyzer, analyzers, CSharp</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <Company>Reflection IT</Company>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.4" PrivateAssets="all">
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.8" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.2.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.2.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.4.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.4.0" />
     <PackageReference Update="NETStandard.Library" PrivateAssets="all" />
   </ItemGroup>
 
@@ -42,6 +47,10 @@
   <ItemGroup>
     <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="" />
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="..\..\License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

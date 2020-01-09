@@ -141,6 +141,15 @@
     <value>Struct must use Fields and not Auto Properties</value>
     <comment>The title of the diagnostic.</comment>
   </data>
+  <data name="EmptyArrayAnalyzerDescription" xml:space="preserve">
+    <value>Use Array.Empty&lt;T&gt;() to create an empty array, it supports caching</value>
+  </data>
+  <data name="EmptyArrayAnalyzerMessageFormat" xml:space="preserve">
+    <value>Use Array.Empty&lt;T&gt;() to create an empty array</value>
+  </data>
+  <data name="EmptyArrayAnalyzerTitle" xml:space="preserve">
+    <value>Use Array.Empty&lt;T&gt;() to create an empty array</value>
+  </data>
   <data name="ForClosureAnalyzerDescription" xml:space="preserve">
     <value>Loop variables possibly incorrectly captured in anonymous method (or lambda) inside a loop body</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>

@@ -26,9 +26,8 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 
         public override void Initialize(AnalysisContext context) {
-            if (context == null) {
-                throw new ArgumentNullException(nameof(context));
-            }
+            context.EnableConcurrentExecution();
+            if (context == null)                 throw new ArgumentNullException(nameof(context));
 
             if (!(context is null)) {
 

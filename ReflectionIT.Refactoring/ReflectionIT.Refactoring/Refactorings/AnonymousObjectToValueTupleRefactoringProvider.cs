@@ -28,13 +28,13 @@ namespace ReflectionIT.Refactoring.Refactorings {
             }
 
             // For any type declaration node, create a code action to reverse the identifier text.
-            var action = CodeAction.Create("Convert Anonymous Object to ValueTuple", c => ReverseTypeNameAsync(context.Document, anonymousObjectCreation, c));
+            var action = CodeAction.Create("Convert Anonymous Object to ValueTuple", c => ConvertToValueTypeAsync(context.Document, anonymousObjectCreation, c));
 
             // Register this code action.
             context.RegisterRefactoring(action);
         }
 
-        private async Task<Document> ReverseTypeNameAsync(Document document, AnonymousObjectCreationExpressionSyntax anonymousObjectCreation, CancellationToken cancellationToken) {
+        private async Task<Document> ConvertToValueTypeAsync(Document document, AnonymousObjectCreationExpressionSyntax anonymousObjectCreation, CancellationToken cancellationToken) {
             // Crate Tuple
             var te = SyntaxFactory.TupleExpression();
 

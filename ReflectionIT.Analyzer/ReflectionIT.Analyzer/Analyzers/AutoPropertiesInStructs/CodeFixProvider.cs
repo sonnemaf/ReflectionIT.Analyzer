@@ -60,15 +60,13 @@ namespace ReflectionIT.Analyzer.Analyzers.AutoPropertiesInStructs {
                 }
             }
 
-            var field = SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(property.Type).WithVariables(SyntaxFactory.SingletonSeparatedList<VariableDeclaratorSyntax>(
-                            SyntaxFactory.VariableDeclarator(property.Identifier))))
-                                .WithModifiers(SyntaxFactory.TokenList(GetModifiers()));
+            var field = SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(property.Type)
+                                        .WithVariables(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.VariableDeclarator(property.Identifier))))
+                                        .WithModifiers(SyntaxFactory.TokenList(GetModifiers()));
 
             // Replace old with new
             var newRoot = root.ReplaceNode(property, field);
-
             var newDocument = document.WithSyntaxRoot(newRoot);
-
             return newDocument;
 
         }

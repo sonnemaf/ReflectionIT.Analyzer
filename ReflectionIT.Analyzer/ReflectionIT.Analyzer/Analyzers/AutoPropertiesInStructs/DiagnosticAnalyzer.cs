@@ -26,9 +26,8 @@ namespace ReflectionIT.Analyzer.Analyzers.AutoPropertiesInStructs {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 
         public override void Initialize(AnalysisContext context) {
-            // TODO: Consider registering other actions that act on syntax instead of or in addition to symbols
+            context.EnableConcurrentExecution();
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-            //context.RegisterSymbolAction(AnalyzeSymbol, SymbolKind.Property);
             context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.PropertyDeclaration);
         }
 
@@ -38,16 +37,13 @@ namespace ReflectionIT.Analyzer.Analyzers.AutoPropertiesInStructs {
 
             // Find locals (not constants) with invalid names
             if (symbol.ContainingType.IsValueType &&
-                property.AccessorList != null &&
-                property.AccessorList.Accessors.All(a => a.Body == null)) {
+                property.AccessorList?.Accessors.All(a => a.Body == null) == true) {
 
                 // For all such symbols, produce a diagnostic.
-                var diagnostic = Diagnostic.Create(_rule, property.GetLocation(), property.Identifier.Text);
+                var diagnostic = Diagnostic.Create(_rule, property.Identifier.GetLocation(), property.Identifier.Text);
 
                 context.ReportDiagnostic(diagnostic);
             }
         }
-
-        public string MyProperty { get; set; }
     }
 }

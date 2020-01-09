@@ -7,48 +7,50 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.Operations;
 
-namespace ReflectionIT.Analyzer.Analyzers.AsyncMethodNameSuffix {
+namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
 
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class AsyncMethodNameSuffixAnalyzer : DiagnosticAnalyzer {
+    [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
+    public class EmptyArrayAnalyzer : DiagnosticAnalyzer {
 
-        public const string DiagnosticId = "RIT0002";
+        public const string DiagnosticId = "RIT0010";
 
         // You can change these strings in the Resources.resx file. If you do not want your analyzer to be localize-able, you can use regular strings for Title and MessageFormat.
         private static readonly LocalizableString _title = new LocalizableResourceString(nameof(Resources.EmptyArrayAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString _messageFormat = new LocalizableResourceString(nameof(Resources.EmptyArrayAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString _description = new LocalizableResourceString(nameof(Resources.EmptyArrayAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
-        private const string Category = DiagnosticAnalyzerCategories.Naming;
+
+        private const string Category = DiagnosticAnalyzerCategories.PracticesAndImprovements;
 
         private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(_rule); } }
 
         public override void Initialize(AnalysisContext context) {
             context.EnableConcurrentExecution();
-            // TODO: Consider registering other actions that act on syntax instead of or in addition to symbols
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
-            context.RegisterSymbolAction(AnalyzeSymbol, SymbolKind.Method);
+            context.RegisterCompilationStartAction(startContext => {
+                var arrayType = startContext.Compilation.GetTypeByMetadataName("System.Array");
+                if (arrayType?.GetMembers("Empty").Length > 0) {
+                    startContext.RegisterOperationAction(AnalyzeArrayCreation, OperationKind.ArrayCreation);
+                }
+            });
         }
 
-        private static void AnalyzeSymbol(SymbolAnalysisContext context) {
-            // TODO: Replace the following code with your own analysis, generating Diagnostic objects for any issues you find
-            var methodSymbol = (IMethodSymbol)context.Symbol;
+        private void AnalyzeArrayCreation(OperationAnalysisContext context) {
+            var arrayCreation = (IArrayCreationOperation)context.Operation;
+            if (arrayCreation.DimensionSizes.Length == 1 && arrayCreation.DimensionSizes[0].ConstantValue.HasValue) {
 
-            // Find just those named type symbols with names containing lowercase letters.
-            if (methodSymbol.IsAsync &&
-                !methodSymbol.ReturnsVoid &&
-                !methodSymbol.IsOverride &&
-                !methodSymbol.Name.EndsWith("Async")) {
-                // For all such symbols, produce a diagnostic.
-                var diagnostic = Diagnostic.Create(_rule, methodSymbol.Locations[0], methodSymbol.Name);
-
-                context.ReportDiagnostic(diagnostic);
+                var dim = arrayCreation.DimensionSizes[0].ConstantValue.Value;
+                if (dim is 0) {
+                    var diagnostic = Diagnostic.Create(_rule, arrayCreation.Syntax.GetLocation());
+                    context.ReportDiagnostic(diagnostic);
+                }
             }
         }
-
-
+        
     }
+
+
 }

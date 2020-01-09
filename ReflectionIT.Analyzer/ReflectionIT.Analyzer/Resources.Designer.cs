@@ -115,6 +115,33 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Array.Empty&lt;T&gt;() to create an empty array, it supports caching.
+        /// </summary>
+        internal static string EmptyArrayAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("EmptyArrayAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Array.Empty&lt;T&gt;() to create an empty array.
+        /// </summary>
+        internal static string EmptyArrayAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("EmptyArrayAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Array.Empty&lt;T&gt;() to create an empty array.
+        /// </summary>
+        internal static string EmptyArrayAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("EmptyArrayAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loop variables possibly incorrectly captured in anonymous method (or lambda) inside a loop body.
         /// </summary>
         internal static string ForClosureAnalyzerDescription {

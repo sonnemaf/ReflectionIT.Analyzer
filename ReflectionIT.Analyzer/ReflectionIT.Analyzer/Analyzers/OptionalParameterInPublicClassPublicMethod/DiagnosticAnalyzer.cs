@@ -26,6 +26,7 @@ namespace ReflectionIT.Analyzer.Analyzers.OptionalParameterInPublicClassPublicMe
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 
         public override void Initialize(AnalysisContext context) {
+            context.EnableConcurrentExecution();
             // TODO: Consider registering other actions that act on syntax instead of or in addition to symbols
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.RegisterSyntaxNodeAction(AnalyzeNode, SyntaxKind.Parameter);
