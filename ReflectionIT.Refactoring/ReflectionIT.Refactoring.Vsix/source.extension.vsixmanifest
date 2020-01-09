@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
                  xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="ReflectionIT.Refactoring..ad800182-8ba9-40fb-9db8-43c4164c7d7b" Version="1.5"
+        <Identity Id="ReflectionIT.Refactoring..ad800182-8ba9-40fb-9db8-43c4164c7d7b" Version="1.6"
                   Language="en-US" Publisher="FonsS"/>
         <DisplayName>ReflectionIT.Refactoring</DisplayName>
         <Description xml:space="preserve">Reflection IT Refactorings</Description>
