@@ -32,7 +32,7 @@ namespace ReflectionIT.Analyzer.Refactorings {
                 return;
             }
 
-            var isStatic = propDecl.Modifiers.Any(s => s.Kind() == SyntaxKind.StaticKeyword);
+            var isStatic = propDecl.Modifiers.Any(s => s.IsKind(SyntaxKind.StaticKeyword));
             if (isStatic) {
                 return;
             }

@@ -48,7 +48,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
             var symbol = sem.GetSymbolInfo(identifier).Symbol;
 
-            var forStatement = identifier.AncestorsAndSelf().OfType<ForStatementSyntax>().First(fss => fss.Declaration.Variables.Any(var => sem.GetDeclaredSymbol(var) == symbol));
+            var forStatement = identifier.AncestorsAndSelf().OfType<ForStatementSyntax>().First(fss => fss.Declaration.Variables.Any(var => SymbolEqualityComparer.Default.Equals(sem.GetDeclaredSymbol(var), symbol)));
 
             var newIdentifier = SyntaxFactory.IdentifierName(identifier.Identifier.Text + "Closure");
 
@@ -100,7 +100,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
             public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node) {
                 var symbol = _model.GetSymbolInfo(node);
-                return symbol.Symbol == _symbol ? _newIdentifier : base.VisitIdentifierName(node);
+                return SymbolEqualityComparer.Default.Equals(symbol.Symbol, _symbol) ? _newIdentifier : base.VisitIdentifierName(node);
             }
         }
     }

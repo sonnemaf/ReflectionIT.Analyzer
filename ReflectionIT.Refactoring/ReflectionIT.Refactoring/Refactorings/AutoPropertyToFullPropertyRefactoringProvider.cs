@@ -47,7 +47,7 @@ namespace ReflectionIT.Analyzer.Refactorings {
             var type = autoProperty.Type.ToString();
             var propName = autoProperty.Identifier.Text;
             var fieldName = "_" + propName[0].ToString().ToLower() + propName.Substring(1);
-            var isStatic = autoProperty.Modifiers.Any(s => s.Kind() == SyntaxKind.StaticKeyword);
+            var isStatic = autoProperty.Modifiers.Any(s => s.IsKind(SyntaxKind.StaticKeyword));
 
             FieldDeclarationSyntax field;
 
