@@ -1,6 +1,4 @@
-﻿using System;
-using System.Composition;
-using System.Collections.Generic;
+﻿using System.Composition;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -10,11 +8,6 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
-
-using Microsoft.CodeAnalysis.CSharp.Extensions;
-using Microsoft.CodeAnalysis.Editing;
 
 namespace ReflectionIT.Analyzer.Analyzers.ExplicitTypecast {
 
@@ -27,7 +20,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ExplicitTypecast {
 
         public const string DiagnosticId = "CS0266";
 
-        private const string title = "Add explicit typecast";
+        private const string _title = "Add explicit typecast";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(DiagnosticId);
 
@@ -46,7 +39,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ExplicitTypecast {
             // Find the type declaration identified by the diagnostic.
             var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<VariableDeclaratorSyntax>().FirstOrDefault();
 
-            if (declaration != null) {
+            if (declaration is not null) {
 
                 var varDeclaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<VariableDeclarationSyntax>().FirstOrDefault();
 
@@ -54,9 +47,9 @@ namespace ReflectionIT.Analyzer.Analyzers.ExplicitTypecast {
                 // Register a code action that will invoke the fix.
                 context.RegisterCodeFix(
                     CodeAction.Create(
-                        title: title,
+                        title: _title,
                         createChangedDocument: c => AddExplicitTypcastAsync(context.Document, declaration, varDeclaration, c),
-                        equivalenceKey: title),
+                        equivalenceKey: _title),
                     diagnostic);
 
 

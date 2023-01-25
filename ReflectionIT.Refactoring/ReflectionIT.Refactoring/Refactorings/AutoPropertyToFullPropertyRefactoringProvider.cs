@@ -53,7 +53,7 @@ namespace ReflectionIT.Analyzer.Refactorings {
 
             // http://roslynquoter.azurewebsites.net/
 
-            if (autoProperty.Initializer != null) {
+            if (autoProperty.Initializer is not null) {
                 field = FieldDeclaration(
                             VariableDeclaration(IdentifierName(type))
                             .WithVariables(

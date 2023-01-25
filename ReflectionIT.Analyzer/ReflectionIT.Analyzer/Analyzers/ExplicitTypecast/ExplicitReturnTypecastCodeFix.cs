@@ -1,6 +1,4 @@
-﻿using System;
-using System.Composition;
-using System.Collections.Generic;
+﻿using System.Composition;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -10,10 +8,6 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
-
-using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.Editing;
 
 namespace ReflectionIT.Analyzer.Analyzers.ExplicitTypecast {
@@ -27,7 +21,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ExplicitTypecast {
 
         public const string DiagnosticId = "CS0266";
 
-        private const string title = "Add explicit typecast";
+        private const string _title = "Add explicit typecast";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(DiagnosticId);
 
@@ -50,39 +44,39 @@ namespace ReflectionIT.Analyzer.Analyzers.ExplicitTypecast {
 
             // Find the type assignment identified by the diagnostic.
             var assignment = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<AssignmentExpressionSyntax>().FirstOrDefault();
-            if (assignment != null) {
+            if (assignment is not null) {
 
                 // Register a code action that will invoke the fix.
                 context.RegisterCodeFix(
                     CodeAction.Create(
-                        title: title,
+                        title: _title,
                         createChangedDocument: c => AddExplicitTypcastAsync(context.Document, assignment, c),
-                        equivalenceKey: title),
+                        equivalenceKey: _title),
                     diagnostic);
 
             } else {
                 // Find the type declaration identified by the diagnostic.
                 var returnStatement = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<ReturnStatementSyntax>().FirstOrDefault();
-                if (returnStatement != null) {
+                if (returnStatement is not null) {
 
                     TypeSyntax returnType = null;
 
                     var property = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<PropertyDeclarationSyntax>().FirstOrDefault();
-                    if (property != null) {
+                    if (property is not null) {
                         returnType = property.Type;
                     } else {
                         var method = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<MethodDeclarationSyntax>().FirstOrDefault();
-                        if (method != null) {
+                        if (method is not null) {
                             returnType = method.ReturnType;
                         }
                     }
 
-                    if (returnType != null) {
+                    if (returnType is not null) {
                         context.RegisterCodeFix(
                             CodeAction.Create(
-                                title: title,
+                                title: _title,
                                 createChangedDocument: c => AddExplicitTypcastAsync(context.Document, returnStatement, returnType, c),
-                                equivalenceKey: title),
+                                equivalenceKey: _title),
                             diagnostic);
                     }
 

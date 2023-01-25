@@ -2,11 +2,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Threading;
 
 namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
@@ -21,9 +19,9 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
         private static readonly LocalizableString _title = new LocalizableResourceString(nameof(Resources.ForClosureAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString _messageFormat = new LocalizableResourceString(nameof(Resources.ForClosureAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString _description = new LocalizableResourceString(nameof(Resources.ForClosureAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
-        private const string Category = DiagnosticAnalyzerCategories.Naming;
+        private const string _category = DiagnosticAnalyzerCategories.Naming;
 
-        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
+        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, _category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 
@@ -37,14 +35,13 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
             var fss = (ForStatementSyntax)context.Node;
 
             var sem = context.SemanticModel;
-            if (fss != null && fss.Declaration != null && sem != null) {
+            if (fss is not null && fss.Declaration is not null && sem is not null) {
                 var variables = fss.Declaration.Variables;
 
-                if (variables != null) {
-                    var symbols = new HashSet<ISymbol>(variables.Select(variable => sem.GetDeclaredSymbol(variable)));
-                    var johnny = new Johnny(context, sem, symbols);
-                    johnny.Visit(fss.Statement);
-                }
+                var symbols = new HashSet<ISymbol>(variables.Select(variable => sem.GetDeclaredSymbol(variable)));
+                var johnny = new Johnny(context, sem, symbols);
+                johnny.Visit(fss.Statement);
+
             }
         }
 
@@ -91,7 +88,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
             public override void VisitIdentifierName(IdentifierNameSyntax node) {
                 if (_inLambda) {
                     var symbol = _model.GetSymbolInfo(node);
-                    if (symbol.Symbol != null && _symbols.Contains(symbol.Symbol)) {
+                    if (symbol.Symbol is not null && _symbols.Contains(symbol.Symbol)) {
                         var diagnostic = Diagnostic.Create(_rule, node.GetLocation(), node.Identifier.Text);
 
                         _context.ReportDiagnostic(diagnostic);

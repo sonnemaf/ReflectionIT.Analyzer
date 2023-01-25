@@ -11,6 +11,7 @@ namespace ReflectionIT.Analyzer.Analyzers {
         public const string CompilerWarnings = "Compiler Warnings";
         public const string CompilerErrors = "Compiler Errors";
         public const string Naming = "Naming";
+        public const string Performance = "Performance";
     }
 }
 

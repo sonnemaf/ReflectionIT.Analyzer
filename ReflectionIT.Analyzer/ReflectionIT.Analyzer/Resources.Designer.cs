@@ -19,7 +19,7 @@ namespace ReflectionIT.Analyzer {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -277,7 +277,7 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Null cheks should use &apos;is null&apos;, the == and != operators could be (incorrectly) overloaded.
+        ///   Looks up a localized string similar to Null cheks should use &apos;is (not) null&apos;, the == and != operators could be (incorrectly) overloaded.
         /// </summary>
         internal static string NullCheckAnalyzerDescription {
             get {
@@ -286,7 +286,7 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;{0} {1} null&apos; check should be written as &apos;{0} is {1}&apos;, the {2} operator could be (incorrectly) overloaded.
+        ///   Looks up a localized string similar to &apos;{0} {2} null&apos; check should be written as &apos;{0} is {1}&apos;, the {2} operator could be (incorrectly) overloaded.
         /// </summary>
         internal static string NullCheckAnalyzerMessageFormat {
             get {
@@ -354,6 +354,33 @@ namespace ReflectionIT.Analyzer {
         internal static string PrivateFieldAnalyzerTitle {
             get {
                 return ResourceManager.GetString("PrivateFieldAnalyzerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String concatination should be converted to String interpolation.
+        /// </summary>
+        internal static string StringConcatAnalyzerDescription {
+            get {
+                return ResourceManager.GetString("StringConcatAnalyzerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String concatination is often slower, convert this to an interpolated string.
+        /// </summary>
+        internal static string StringConcatAnalyzerMessageFormat {
+            get {
+                return ResourceManager.GetString("StringConcatAnalyzerMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String concatination should be converted to String interpolation.
+        /// </summary>
+        internal static string StringConcatAnalyzerTitle {
+            get {
+                return ResourceManager.GetString("StringConcatAnalyzerTitle", resourceCulture);
             }
         }
     }

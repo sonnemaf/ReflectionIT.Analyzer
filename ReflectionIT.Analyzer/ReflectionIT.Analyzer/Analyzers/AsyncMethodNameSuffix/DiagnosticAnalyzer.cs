@@ -1,13 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Threading;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System.Threading.Tasks;
 
 namespace ReflectionIT.Analyzer.Analyzers.AsyncMethodNameSuffix {
 
@@ -20,9 +13,9 @@ namespace ReflectionIT.Analyzer.Analyzers.AsyncMethodNameSuffix {
         private static readonly LocalizableString _title = new LocalizableResourceString(nameof(Resources.EmptyArrayAnalyzerTitle), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString _messageFormat = new LocalizableResourceString(nameof(Resources.EmptyArrayAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString _description = new LocalizableResourceString(nameof(Resources.EmptyArrayAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
-        private const string Category = DiagnosticAnalyzerCategories.Naming;
+        private const string _category = DiagnosticAnalyzerCategories.Naming;
 
-        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
+        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, _category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 

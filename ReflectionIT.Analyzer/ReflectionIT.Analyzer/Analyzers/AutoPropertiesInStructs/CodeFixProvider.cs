@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
@@ -10,15 +9,13 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
 
 namespace ReflectionIT.Analyzer.Analyzers.AutoPropertiesInStructs {
 
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(AutoPropertiesInStructsCodeFixProvider)), Shared]
     public class AutoPropertiesInStructsCodeFixProvider : CodeFixProvider {
 
-        private const string Title = "Convert to Field";
+        private const string _title = "Convert to Field";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(AutoPropertiesInStructsAnalyzer.DiagnosticId);
 
@@ -40,9 +37,9 @@ namespace ReflectionIT.Analyzer.Analyzers.AutoPropertiesInStructs {
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: Title,
+                    title: _title,
                     createChangedDocument: c => ConvertToFieldAsync(context.Document, root, declaration, c),
-                    equivalenceKey: Title),
+                    equivalenceKey: _title),
                 diagnostic);
         }
 

@@ -18,9 +18,9 @@ namespace ReflectionIT.Analyzer.Structs {
         private static readonly LocalizableString _title = "Ref readonly local for a non-readonly value type (struct)";
         private static readonly LocalizableString _messageFormat = "Ref readonly local '{0}' is a non-readonly struct which may leads to defensive copies";
         private static readonly LocalizableString _description = "Ref readonly local should be a readonly value type (struct) or a reference type.";
-        private const string Category = "Usage";
+        private const string _category = "Usage";
 
-        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
+        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, _category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(_rule); } }
 

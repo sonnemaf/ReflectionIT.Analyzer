@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Editing;
 
 namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
@@ -22,7 +16,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MissingModifiersCodeFixProvider)), Shared]
     public class MissingModifiersCodeFixProvider : CodeFixProvider {
 
-        private const string Title = "Add modifier";
+        private const string _title = "Add modifier";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MissingModifiersAnalyzer.DiagnosticId);
 
@@ -41,14 +35,14 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             var symbol = semanticModel.GetDeclaredSymbol(statement);
             var accessibility = symbol?.DeclaredAccessibility ?? Accessibility.Private;
 
-            if (symbol != null && (symbol.Kind == SymbolKind.Method || symbol.Kind == SymbolKind.Property) && (symbol.IsVirtual || symbol.IsAbstract)) {
+            if (symbol is not null && (symbol.Kind == SymbolKind.Method || symbol.Kind == SymbolKind.Property) && (symbol.IsVirtual || symbol.IsAbstract)) {
                 accessibility = Accessibility.Protected;
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(Title, 
+                CodeAction.Create(_title, 
                                   x => AddModifierAsync(context.Document, root, statement, accessibility), 
-                                  Title), diagnostic);
+                                  _title), diagnostic);
         }
 
         private Task<Solution> AddModifierAsync(Document document, SyntaxNode root, SyntaxNode statement,

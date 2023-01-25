@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
@@ -10,15 +9,13 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
 
 namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
 
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NonPrivateFieldCodeFixProvider)), Shared]
     public class NonPrivateFieldCodeFixProvider : CodeFixProvider {
 
-        private const string Title = "Convert to Auto Property";
+        private const string _title = "Convert to Auto Property";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(NonPrivateFieldAnalyzer.DiagnosticId);
 
@@ -39,9 +36,9 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: Title,
+                    title: _title,
                     createChangedDocument: c => ConvertToAutoPropertyAsync(context.Document, root, declaration, c),
-                    equivalenceKey: Title),
+                    equivalenceKey: _title),
                 diagnostic);
         }
 
@@ -82,7 +79,7 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
                     SyntaxFactory.Token(
                         SyntaxKind.CloseBraceToken)));
 
-                if (variable.Initializer != null) {
+                if (variable.Initializer is not null) {
                     prop = prop.WithInitializer(variable.Initializer).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
                 }
 

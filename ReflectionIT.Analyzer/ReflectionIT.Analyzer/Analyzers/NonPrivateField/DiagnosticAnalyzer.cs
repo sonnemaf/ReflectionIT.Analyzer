@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Threading;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
@@ -19,9 +13,9 @@ namespace ReflectionIT.Analyzer.Analyzers.NonPrivateField {
         private static readonly LocalizableString _messageFormat = new LocalizableResourceString(nameof(Resources.NonPrivateFieldAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString _description = new LocalizableResourceString(nameof(Resources.NonPrivateFieldAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
 
-        private const string Category = DiagnosticAnalyzerCategories.PracticesAndImprovements;
+        private const string _category = DiagnosticAnalyzerCategories.PracticesAndImprovements;
 
-        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
+        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, _category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 

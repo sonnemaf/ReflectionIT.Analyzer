@@ -2,11 +2,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Threading;
 
 namespace ReflectionIT.Analyzer.Analyzers.OptionalParameterInPublicClassPublicMethod {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -19,9 +15,9 @@ namespace ReflectionIT.Analyzer.Analyzers.OptionalParameterInPublicClassPublicMe
         private static readonly LocalizableString _messageFormat = new LocalizableResourceString(nameof(Resources.OptionalParameterInPublicClassPublicMethodAnalyzerMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString _description = new LocalizableResourceString(nameof(Resources.OptionalParameterInPublicClassPulicMethodAnalyzerDescription), Resources.ResourceManager, typeof(Resources));
 
-        private const string Category = DiagnosticAnalyzerCategories.PracticesAndImprovements;
+        private const string _category = DiagnosticAnalyzerCategories.PracticesAndImprovements;
 
-        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: _description);
+        private static readonly DiagnosticDescriptor _rule = new DiagnosticDescriptor(DiagnosticId, _title, _messageFormat, _category, DiagnosticSeverity.Warning, isEnabledByDefault: false, description: _description);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(_rule);
 
@@ -39,7 +35,7 @@ namespace ReflectionIT.Analyzer.Analyzers.OptionalParameterInPublicClassPublicMe
                 var type = context.SemanticModel.GetDeclaredSymbol(method).ContainingSymbol;
 
                 // Find locals (not constants) with invalid names
-                if (parameter.Default != null && method != null && !Allowed(accessibility) && !Allowed(type.DeclaredAccessibility)) {
+                if (parameter.Default is not null && method is not null && !Allowed(accessibility) && !Allowed(type.DeclaredAccessibility)) {
                     // For all such symbols, produce a diagnostic.
                     var diagnostic = Diagnostic.Create(_rule, parameter.GetLocation(), parameter);
                     context.ReportDiagnostic(diagnostic);

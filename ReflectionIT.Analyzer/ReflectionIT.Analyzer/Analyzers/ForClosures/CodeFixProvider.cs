@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
 using System.Threading;
@@ -10,8 +8,6 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
 
 namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
@@ -19,7 +15,7 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ForClosureCodeFixProvider)), Shared]
     public class ForClosureCodeFixProvider : CodeFixProvider {
-        private const string Title = "Capture using local variable";
+        private const string _title = "Capture using local variable";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(ForClosureAnalyzer.DiagnosticId);
 
@@ -37,9 +33,9 @@ namespace ReflectionIT.Analyzer.Analyzers.ForClosure {
 
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: Title,
+                    title: _title,
                     createChangedDocument: c => FixClosuresAsync(context.Document, identifier, c),
-                    equivalenceKey: Title),
+                    equivalenceKey: _title),
                 diagnostic);
         }
 

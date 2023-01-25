@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Editing;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
@@ -14,7 +13,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
 
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NullCheckCodeFixProvider)), Shared]
     public class NullCheckCodeFixProvider : CodeFixProvider {
-        private const string Title = "Fix null check";
+        private const string _title = "Fix null check";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(NullCheckAnalyzer.DiagnosticId);
 
@@ -35,9 +34,9 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: Title,
+                    title: _title,
                     createChangedDocument: c => ReplaceEqualsWithIsAsync(context.Document, declaration, context.CancellationToken),
-                    equivalenceKey: Title),
+                    equivalenceKey: _title),
                 diagnostic);
 
 
@@ -46,7 +45,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
         private async Task<Document> ReplaceEqualsWithIsAsync(Document document, BinaryExpressionSyntax comp, CancellationToken c) {
 
             var left = (comp.Right.Kind() == SyntaxKind.NullLiteralExpression) ? comp.Left : comp.Right;
-            var right = (comp.OperatorToken.Kind() == SyntaxKind.ExclamationEqualsToken) ? SyntaxFactory.ParseExpression("object") : SyntaxFactory.ParseExpression("null");
+            var right = (comp.OperatorToken.IsKind(SyntaxKind.ExclamationEqualsToken)) ? SyntaxFactory.ParseExpression("not null") : SyntaxFactory.ParseExpression("null");
 
             SyntaxNode newOperatorToken = SyntaxFactory.BinaryExpression(SyntaxKind.IsExpression, left, right);
 

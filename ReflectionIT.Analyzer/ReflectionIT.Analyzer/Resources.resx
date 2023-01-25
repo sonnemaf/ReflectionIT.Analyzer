@@ -211,11 +211,11 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="NullCheckAnalyzerDescription" xml:space="preserve">
-    <value>Null cheks should use 'is null', the == and != operators could be (incorrectly) overloaded</value>
+    <value>Null cheks should use 'is (not) null', the == and != operators could be (incorrectly) overloaded</value>
     <comment>An optional longer localizable description of the diagnostic.</comment>
   </data>
   <data name="NullCheckAnalyzerMessageFormat" xml:space="preserve">
-    <value>'{0} {1} null' check should be written as '{0} is {1}', the {2} operator could be (incorrectly) overloaded</value>
+    <value>'{0} {2} null' check should be written as '{0} is {1}', the {2} operator could be (incorrectly) overloaded</value>
     <comment>The format-able message the diagnostic displays.</comment>
   </data>
   <data name="NullCheckAnalyzerTitle" xml:space="preserve">
@@ -245,5 +245,14 @@
   <data name="PrivateFieldAnalyzerTitle" xml:space="preserve">
     <value>Private field must start with an underscore and camelCased</value>
     <comment>The title of the diagnostic.</comment>
+  </data>
+  <data name="StringConcatAnalyzerDescription" xml:space="preserve">
+    <value>String concatination should be converted to String interpolation</value>
+  </data>
+  <data name="StringConcatAnalyzerMessageFormat" xml:space="preserve">
+    <value>String concatination is often slower, convert this to an interpolated string</value>
+  </data>
+  <data name="StringConcatAnalyzerTitle" xml:space="preserve">
+    <value>String concatination should be converted to String interpolation</value>
   </data>
 </root>

@@ -36,7 +36,7 @@ namespace ReflectionIT.Analyzer.Helpers {
         };
 
         public static bool ImplementsInterfaceOrBaseClass(this INamedTypeSymbol typeSymbol, Type interfaceType) {
-            if (typeSymbol == null) {
+            if (typeSymbol is null) {
                 return false;
             }
 
@@ -54,7 +54,7 @@ namespace ReflectionIT.Analyzer.Helpers {
         }
 
         public static bool ImplementsInterface(this INamedTypeSymbol typeSymbol, Type interfaceType) {
-            if (typeSymbol == null) {
+            if (typeSymbol is null) {
                 return false;
             }
 
@@ -68,12 +68,12 @@ namespace ReflectionIT.Analyzer.Helpers {
         }
 
         public static bool InheritsFrom(this ISymbol typeSymbol, Type type) {
-            if (typeSymbol == null || type == null) {
+            if (typeSymbol is null || type is null) {
                 return false;
             }
 
             var baseType = typeSymbol;
-            while (baseType != null && baseType.MetadataName != typeof(object).Name &&
+            while (baseType is not null && baseType.MetadataName != typeof(object).Name &&
                    baseType.MetadataName != typeof(ValueType).Name) {
                 if (baseType.MetadataName == type.Name) {
                     return true;
@@ -112,20 +112,15 @@ namespace ReflectionIT.Analyzer.Helpers {
         }
 
         public static string ToAlias(this string type) {
-            if (type == null) {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            if (_aliasMapping.TryGetValue(type, out var foundValue))
-            {
-                return foundValue;
-            }
-
-            throw new ArgumentException("Could not find the type specified", nameof(type));
+            return type is null
+                ? throw new ArgumentNullException(nameof(type))
+                : _aliasMapping.TryGetValue(type, out var foundValue)
+                ? foundValue
+                : throw new ArgumentException("Could not find the type specified", nameof(type));
         }
 
         public static bool HasAlias(this string type, out string alias) {
-            if (type == null) {
+            if (type is null) {
                 throw new ArgumentNullException(nameof(type));
             }
 
@@ -145,7 +140,7 @@ namespace ReflectionIT.Analyzer.Helpers {
 
         public static bool IsDefinedInAncestor(this IMethodSymbol methodSymbol) {
             var containingType = methodSymbol?.ContainingType;
-            if (containingType == null) {
+            if (containingType is null) {
                 return false;
             }
 
@@ -154,14 +149,14 @@ namespace ReflectionIT.Analyzer.Helpers {
                 var interfaceMethods = @interface.GetMembers().Select(containingType.FindImplementationForInterfaceMember);
 
                 foreach (var method in interfaceMethods) {
-                    if (method != null && method.Equals(methodSymbol)) {
+                    if (method is not null && method.Equals(methodSymbol)) {
                         return true;
                     }
                 }
             }
 
             var baseType = containingType.BaseType;
-            while (baseType != null) {
+            while (baseType is not null) {
                 var baseMethods = baseType.GetMembers().OfType<IMethodSymbol>();
 
                 foreach (var method in baseMethods) {
@@ -182,7 +177,7 @@ namespace ReflectionIT.Analyzer.Helpers {
                                             SemanticModel semanticModel) {
             var invokedMethod = semanticModel.GetSymbolInfo(invocation);
             var invokedType = invokedMethod.Symbol?.ContainingType;
-            return invokedType == null
+            return invokedType is null
                 ? false
                 : invokedType.MetadataName == type.Name &&
                    invokedMethod.Symbol.MetadataName == method;
@@ -190,7 +185,7 @@ namespace ReflectionIT.Analyzer.Helpers {
 
         // TODO: tests
         public static bool IsNameofInvocation(this InvocationExpressionSyntax invocation) {
-            if (invocation == null) {
+            if (invocation is null) {
                 throw new ArgumentNullException(nameof(invocation));
             }
 
@@ -198,7 +193,7 @@ namespace ReflectionIT.Analyzer.Helpers {
                                        .OfType<IdentifierNameSyntax>()
                                        .FirstOrDefault();
 
-            return identifier != null && identifier.Identifier.ValueText == "nameof";
+            return identifier is not null && identifier.Identifier.ValueText == "nameof";
         }
 
         /// <summary>
@@ -239,7 +234,7 @@ namespace ReflectionIT.Analyzer.Helpers {
 
         public static bool Contains(this SyntaxTokenList list, SyntaxKind kind) {
             foreach (var item in list) {
-                if (item.Kind() == kind) {
+                if (item.IsKind(kind)) {
                     return true;
                 }
             }

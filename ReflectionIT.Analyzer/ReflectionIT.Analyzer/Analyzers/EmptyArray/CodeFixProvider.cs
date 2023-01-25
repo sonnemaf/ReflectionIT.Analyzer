@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
 using System.Threading;
@@ -9,8 +7,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.CodeAnalysis.Editing;
@@ -19,7 +15,7 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
 
     [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic), Shared]
     public class EmptyArrayCodeFixProvider : CodeFixProvider {
-        private const string title = "Replace with Array.Empty<T>()";
+        private const string _title = "Replace with Array.Empty<T>()";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds {
             get { return ImmutableArray.Create(EmptyArrayAnalyzer.DiagnosticId); }
@@ -38,9 +34,9 @@ namespace ReflectionIT.Analyzer.Analyzers.PrivateField {
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: title,
+                    title: _title,
                     createChangedDocument: c => UseArrayEmptyAsync(c, context.Document, diagnosticSpan),
-                    equivalenceKey: title),
+                    equivalenceKey: _title),
                 diagnostic);
 
             return Task.FromResult(false);
