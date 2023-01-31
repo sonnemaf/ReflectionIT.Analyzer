@@ -10,7 +10,7 @@
 
 	<PropertyGroup>
 		<PackageId>ReflectionIT.Analyzer</PackageId>
-		<Version>3.6</Version>
+		<Version>3.6.1</Version>
 		<PackageVersion>$(Version)</PackageVersion>
 		<FileVersion>$(Version)</FileVersion>
 		<Authors>Fons Sonnemans</Authors>
@@ -20,7 +20,7 @@
 		<RepositoryUrl>https://github.com/sonnemaf/ReflectionIT.Analyzer</RepositoryUrl>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<Description>ReflectionIT.Analyzer, supports Visual Studio 2019 and 2022</Description>
-		<PackageReleaseNotes>StringConcatAnalyzer added, improved NullCheckAnalyzer and Fix</PackageReleaseNotes>
+		<PackageReleaseNotes>StringConcatAnalyzer is now conditional on C#10+ and .NET6+</PackageReleaseNotes>
 		<Copyright>Copyright Reflection IT</Copyright>
 		<PackageTags>ReflectionIT.Analyzer, analyzers, CSharp</PackageTags>
 		<NoPackageAnalysis>true</NoPackageAnalysis>

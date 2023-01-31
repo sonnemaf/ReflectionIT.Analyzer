@@ -2,7 +2,9 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using ReflectionIT.Analyzer.Helpers;
 using System.Collections.Immutable;
+using System.Xml.Linq;
 
 namespace ReflectionIT.Analyzer.Analyzers.StringConcat {
 
@@ -24,15 +26,21 @@ namespace ReflectionIT.Analyzer.Analyzers.StringConcat {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
 
+
             context.RegisterSyntaxNodeAction(AnalyzeAddExpression, SyntaxKind.AddExpression);
         }
 
         private void AnalyzeAddExpression(SyntaxNodeAnalysisContext context) {
-            if (context.Node is BinaryExpressionSyntax addExpression) {
-                var retType = context.SemanticModel.GetTypeInfo(addExpression);
-                if (retType.Type.SpecialType == SpecialType.System_String) context.ReportDiagnostic(Diagnostic.Create(Rule, context.Node.GetLocation()));
+            if (context.Compilation.HasLanguageVersionAtLeastEqualTo(LanguageVersion.CSharp10)) {
+                IAssemblySymbol coreLibAssemblySymbol = context.Compilation.GetSpecialType(SpecialType.System_Runtime_CompilerServices_RuntimeFeature).ContainingAssembly;
+                if (coreLibAssemblySymbol.GetTypeByMetadataName("System.Runtime.CompilerServices.DefaultInterpolatedStringHandler") is not null) {
+                    if (context.Node is BinaryExpressionSyntax addExpression) {
+                        var retType = context.SemanticModel.GetTypeInfo(addExpression);
+                        if (retType.Type.SpecialType == SpecialType.System_String) context.ReportDiagnostic(Diagnostic.Create(Rule, context.Node.GetLocation()));
+                    }
+                }
             }
-        }
 
+        }
     }
 }
