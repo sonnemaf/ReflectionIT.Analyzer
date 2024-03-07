@@ -247,12 +247,12 @@
     <comment>The title of the diagnostic.</comment>
   </data>
   <data name="StringConcatAnalyzerDescription" xml:space="preserve">
-    <value>String concatination should be converted to String interpolation</value>
+    <value>String concatenation is used where string interpolation could be used instead to improve the performance</value>
   </data>
   <data name="StringConcatAnalyzerMessageFormat" xml:space="preserve">
-    <value>String concatination is often slower, convert this to an interpolated string</value>
+    <value>String concatenation is used where string interpolation could be used instead to improve the performance</value>
   </data>
   <data name="StringConcatAnalyzerTitle" xml:space="preserve">
-    <value>String concatination should be converted to String interpolation</value>
+    <value>Do not use string concatenation when string interpolation can be used</value>
   </data>
 </root>

@@ -358,7 +358,7 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String concatination should be converted to String interpolation.
+        ///   Looks up a localized string similar to String concatenation is used where string interpolation could be used instead to improve the performance.
         /// </summary>
         internal static string StringConcatAnalyzerDescription {
             get {
@@ -367,7 +367,7 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String concatination is often slower, convert this to an interpolated string.
+        ///   Looks up a localized string similar to String concatenation is used where string interpolation could be used instead to improve the performance.
         /// </summary>
         internal static string StringConcatAnalyzerMessageFormat {
             get {
@@ -376,7 +376,7 @@ namespace ReflectionIT.Analyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to String concatination should be converted to String interpolation.
+        ///   Looks up a localized string similar to Do not use string concatenation when string interpolation can be used.
         /// </summary>
         internal static string StringConcatAnalyzerTitle {
             get {
